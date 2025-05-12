@@ -1175,7 +1175,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-       
+        function setupCollectionButtons() {
+    // Bouton "Découvrir la Collection" dans la section héro
+    const heroCollectionBtn = document.querySelector('.hero-btn');
+    if (heroCollectionBtn) {
+        heroCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+            }
+        });
+    }
+    
+    // Bouton "Voir Toute la Collection" dans la section collection
+    const fullCollectionBtn = document.querySelector('.collection-link');
+    if (fullCollectionBtn) {
+        fullCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+            }
+        });
+    }
+}
     </script>
 
     <style>
@@ -1590,7 +1620,10 @@ setTimeout(() => {
 });
 
 
-    
+    window.addEventListener('load', function() {
+    setupMobileNavigation();
+    setupCollectionButtons();
+});
 
 // Réexécuter lors du redimensionnement
 window.addEventListener('resize', setupMobileNavigation);
@@ -1612,67 +1645,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+    // Ajoutez uniquement ce script à la fin de votre section <script>, juste avant </script>
 
-
-
-
-
-    // Cette fonction gère les clics sur les boutons "Découvrir la Collection" et "Voir Toute la Collection"
-function setupCollectionButtons() {
-    console.log("Setting up collection buttons"); // Aide au débogage
-    
-    // Bouton "Découvrir la Collection" dans la section héro
-    const heroCollectionBtn = document.querySelector('.hero-btn');
-    if (heroCollectionBtn) {
-        console.log("Hero button found"); // Aide au débogage
-        heroCollectionBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log("Hero button clicked"); // Aide au débogage
-            
-            // Trouver le lien de navigation pour la collection
-            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
-            if (collectionNavLink) {
-                // Simuler un clic sur le lien de navigation
-                collectionNavLink.click();
-                console.log("Redirected to collection"); // Aide au débogage
-            } else {
-                console.log("Collection link not found"); // Aide au débogage
-            }
-        });
-    } else {
-        console.log("Hero button not found"); // Aide au débogage
-    }
-    
-    // Bouton "Voir Toute la Collection" dans la section collection
-    const fullCollectionBtn = document.querySelector('.collection-link');
-    if (fullCollectionBtn) {
-        console.log("Full collection button found"); // Aide au débogage
-        fullCollectionBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log("Full collection button clicked"); // Aide au débogage
-            
-            // Trouver le lien de navigation pour la collection
-            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
-            if (collectionNavLink) {
-                // Simuler un clic sur le lien de navigation
-                collectionNavLink.click();
-                console.log("Redirected to collection page"); // Aide au débogage
-            } else {
-                console.log("Collection link not found"); // Aide au débogage
-            }
-        });
-    } else {
-        console.log("Full collection button not found"); // Aide au débogage
-    }
-}
-
-// Appeler la fonction au chargement du document
+// Correction des boutons de collection
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM content loaded, setting up buttons"); // Aide au débogage
-    setupCollectionButtons();
-});
-
-    document.addEventListener('DOMContentLoaded', function() {
     // Bouton "Découvrir la Collection" dans la section hero
     const heroBtn = document.querySelector('.hero-btn');
     if (heroBtn) {
