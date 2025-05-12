@@ -1538,50 +1538,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             
             // Marqueur personnalisé
             const icon = L.divIcon({
-                className: 'custom-marker',
-                html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
-                iconSize: [30, 30],
-                iconAnchor: [15, 30]
-            });
-            
-            // Ajout du marqueur
-            const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
-            
-            // Infobulle
-            // Infobulle améliorée avec classe CSS
-marker.bindPopup(`
+    className: 'custom-marker',
+    html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+    iconSize: [30, 30],
+    iconAnchor: [15, 15] // Modifié: centré sur le point
+});
+
+// Ajout du marqueur sans ouvrir la popup immédiatement
+const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
+
+// Configuration de la popup
+const popupContent = `
     <div class="boutique-popup">
         <h3>GABRIEL.LE</h3>
         <p>${boutiqueAdresse}</p>
     </div>
-`, {
-    // Options de la popup
-    closeButton: false,           // Supprime le bouton de fermeture
-    className: 'custom-popup',    // Classe personnalisée pour styliser
-    offset: [0, -15],             // Ajuste la position verticale
-    autoPan: true,                // Centre la carte sur la popup
-    autoPanPadding: [40, 40]      // Marge autour lors du centrage
-}).openPopup();
-            
-            // Événement de chargement complet des tuiles
-            map.on('load', function() {
-                console.log("Carte chargée avec succès");
-            });
-            
-            // Gérer les erreurs de chargement de tuiles
-            map.on('tileerror', function(error) {
-                console.error("Erreur de chargement de tuile:", error);
-                // Si OpenStreetMap échoue, essayer CartoDB
-                if (map.hasLayer(osmLayer)) {
-                    map.removeLayer(osmLayer);
-                    cartoDBLayer.addTo(map);
-                }
-            });
-            
-            // Force un recalcul de la taille après chargement
-            setTimeout(() => {
-                map.invalidateSize(true);
-            }, 500);
+`;
+
+const popupOptions = {
+    closeButton: false,
+    className: 'custom-popup',
+    offset: [0, -10],
+    autoPan: true,
+    autoPanPadding: [40, 40]
+};
+
+// Attacher la popup au marqueur
+marker.bindPopup(popupContent, popupOptions);
+
+// Ouvrir la popup après un court délai pour permettre à la carte de s'initialiser correctement
+setTimeout(() => {
+    marker.openPopup();
+    // Forcer la carte à se recentrer après l'ouverture de la popup
+    map.panTo(boutiqueLocation);
+}, 700);
             
             // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
             setTimeout(() => {
