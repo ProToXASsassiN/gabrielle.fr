@@ -1492,11 +1492,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Modifiez votre code JavaScript pour la carte comme suit
+
+document.addEventListener('DOMContentLoaded', function() {
+    window.boutiqueMarker = null;
     // Configuration
     const boutiqueLocation = [48.108385, -1.677844];
     const boutiqueAdresse = "14 rue du maréchal joffre à Rennes";
     const mapZoom = 16;
+    
+    // Variable globale pour stocker le marqueur
+    let boutiqueMarker;
     
     // Création d'une fonction pour initialiser la carte avec gestion des erreurs
     function initMap() {
@@ -1537,59 +1543,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             cartoDBLayer.addTo(map);
             
             // Marqueur personnalisé
-            // Remplacez complètement votre code de création du marqueur et de la popup par celui-ci:
-
-// Marqueur personnalisé avec ancrage correct
-// Gardez vos paramètres d'icône et de marqueur existants
-// Changez uniquement la partie concernant la popup
-
-// Ajout du marqueur (conservez votre icône d'origine)
-const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
-
-// Définir le contenu de la popup - conservez le même style que vous aviez
-const popupContent = `
-    <div style="padding:10px; width:200px;">
-        <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
-        <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
-    </div>
-`;
-
-// Lier la popup au marqueur mais NE PAS l'ouvrir immédiatement
-marker.bindPopup(popupContent);
-
-// Attendre que la carte soit complètement chargée
-map.on('load', () => {
-    setTimeout(() => {
-        // S'assurer que la carte est bien centrée
-        map.panTo(boutiqueLocation);
-        
-        // Ouvrir la popup avec un petit délai
-        marker.openPopup();
-    }, 500);
-});
-
-// Si l'événement 'load' n'est pas fiable, utilisez également whenReady et un timer de secours
-map.whenReady(() => {
-    setTimeout(() => {
-        if (!marker.isPopupOpen()) {
-            map.panTo(boutiqueLocation);
-            marker.openPopup();
-        }
-    }, 800);
-});
-
-// Timer de secours - s'assure que la popup s'ouvre même si les autres méthodes échouent
-setTimeout(() => {
-    if (!marker.isPopupOpen()) {
-        map.panTo(boutiqueLocation);
-        marker.openPopup();
-    }
-}, 1200);
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
             
-            // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
+            // Ajout du marqueur
+            const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
+            
+            // Infobulle - Ne pas l'ouvrir automatiquement au chargement
+            marker.bindPopup(`
+                <div style="padding:10px; width:200px;">
+                    <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
+                    <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
+                </div>
+            `);
+            
+            // Stocker le marqueur dans une variable globale pour y accéder plus tard
+            window.boutiqueMarker = marker;
+            
+            // Événement de chargement complet des tuiles
+            map.on('load', function() {
+                console.log("Carte chargée avec succès");
+            });
+            
+            // Gérer les erreurs de chargement de tuiles
+            map.on('tileerror', function(error) {
+                console.error("Erreur de chargement de tuile:", error);
+                // Si OpenStreetMap échoue, essayer CartoDB
+                if (map.hasLayer(osmLayer)) {
+                    map.removeLayer(osmLayer);
+                    cartoDBLayer.addTo(map);
+                }
+            });
+            
+            // Force un recalcul de la taille après chargement
             setTimeout(() => {
                 map.invalidateSize(true);
-            }, 1500);
+            }, 500);
             
             return map;
         } catch (error) {
@@ -1606,23 +1599,32 @@ setTimeout(() => {
             window.boutiqueMap.invalidateSize(true);
         }
     });
+});
+
+// Ajouter ce code pour simuler un clic sur le marqueur
+// lorsque l'utilisateur navigue vers la section Contact
+document.addEventListener('DOMContentLoaded', function() {
+    // Trouver le lien de navigation Contact
+    const contactLink = document.querySelector('a[href="#contact"]');
     
-    // Si la carte est dans un onglet, s'assurer qu'elle se recalcule lorsque l'onglet devient visible
-    document.addEventListener('click', function(e) {
-        if (e.target && (e.target.getAttribute('data-toggle') === 'tab' || e.target.closest('[data-toggle="tab"]'))) {
+    if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+            // Laisser un délai pour que la page de contact s'affiche
             setTimeout(() => {
+                // Simuler un clic sur le marqueur pour ouvrir la popup
+                if (window.boutiqueMarker) {
+                    window.boutiqueMarker.openPopup();
+                } else if (typeof boutiqueMarker !== 'undefined') {
+                    boutiqueMarker.openPopup();
+                }
+                
+                // S'assurer que la carte est correctement dimensionnée
                 if (window.boutiqueMap) {
                     window.boutiqueMap.invalidateSize(true);
                 }
-            }, 100);
-        }
-    });
-});
-
-
-    window.addEventListener('load', function() {
-    setupMobileNavigation();
-    setupCollectionButtons();
+            }, 300); // Délai de 300ms comme vous l'avez suggéré
+        });
+    }
 });
 
 // Réexécuter lors du redimensionnement
@@ -1645,6 +1647,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+
+    // Ajouter ce code pour simuler un clic sur le marqueur
+document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
