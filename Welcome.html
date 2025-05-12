@@ -1635,14 +1635,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 <style>
-    .leaflet-popup-content-wrapper {
+    /* Styles améliorés pour la popup de la carte */
+.leaflet-popup {
+    margin-bottom: 25px; /* Ajuste la position verticale de toute la popup */
+}
+
+.leaflet-popup-content-wrapper {
     width: 200px;
     border-radius: 8px;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
     padding: 0;
     overflow: hidden;
 }
-    .leaflet-popup-content {
+
+.leaflet-popup-content {
     margin: 0;
     width: 100% !important;
 }
@@ -1657,6 +1663,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     color: var(--primary);
     margin: 0 0 8px 0;
     font-family: 'Playfair Display', serif;
+    font-size: 16px;
 }
 
 .boutique-popup p {
@@ -1667,12 +1674,30 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* Ajuster la position de la flèche pour qu'elle sorte du point */
 .leaflet-popup-tip-container {
-    margin-left: -11px; /* Ajustement horizontal */
+    width: 30px;
+    height: 15px;
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    bottom: -15px; /* Ajusté pour assurer un bon positionnement */
 }
 
 .leaflet-popup-tip {
+    width: 15px;
+    height: 15px;
     background-color: white;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(45deg);
+    margin: -8px auto 0;
+}
+
+/* Classe personnalisée pour notre popup */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: white;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: white;
 }
     .contact-map {
         width: 100%;
