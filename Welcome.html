@@ -1671,6 +1671,32 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM content loaded, setting up buttons"); // Aide au débogage
     setupCollectionButtons();
 });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Bouton "Découvrir la Collection" dans la section hero
+    const heroBtn = document.querySelector('.hero-btn');
+    if (heroBtn) {
+        heroBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const servicesLink = document.querySelector('.nav-links a[href="#services"]');
+            if (servicesLink) {
+                servicesLink.click();
+            }
+        });
+    }
+    
+    // Bouton "Voir Toute la Collection" dans la section collection
+    const collectionLink = document.querySelector('.collection-link');
+    if (collectionLink) {
+        collectionLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const servicesLink = document.querySelector('.nav-links a[href="#services"]');
+            if (servicesLink) {
+                servicesLink.click();
+            }
+        });
+    }
+});
 </script>
 
 <style>
