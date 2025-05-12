@@ -33,50 +33,48 @@
         }
         
         /* --- NAVIGATION --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0px 5%;
-            background-color: rgba(254, 248, 255, 0.95);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
+        
         
         nav.scrolled {
             padding: 10px 5%;
         }
         
-        .logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--primary);
-            text-decoration: none;
-            margin: 0 auto; /* Centre horizontalement */
-        }
-        
-        .logo img {
-            height: 100px;
-            margin-right: 10px;
-            transition: var(--transition);
-        }
+        nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 5%;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.logo img {
+    height: 100px;
+    transition: var(--transition);
+}
+
+/* Assurez-vous que la barre de navigation est bien centrée également */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 35px;
+    padding: 5px 0;
+}
         
         nav.scrolled .logo img {
             height: 100px;
         }
         
-        .nav-links {
-            display: flex;
-            justify-content: center; /* Centre les liens */
-            gap: 35px;
-        }
+        
         
         .nav-links a {
             text-decoration: none;
