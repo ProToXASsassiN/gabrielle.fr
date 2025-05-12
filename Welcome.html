@@ -1537,17 +1537,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             cartoDBLayer.addTo(map);
             
             // Marqueur personnalisé
-            const icon = L.divIcon({
+            // Remplacez complètement votre code de création du marqueur et de la popup par celui-ci:
+
+// Marqueur personnalisé avec ancrage correct
+const icon = L.divIcon({
     className: 'custom-marker',
-    html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
-    iconSize: [30, 30],
-    iconAnchor: [15, 15] // Modifié: centré sur le point
+    html: '<div style="background-color:#c04caa;width:20px;height:20px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10] // point central exact
 });
 
-// Ajout du marqueur sans ouvrir la popup immédiatement
+// Ajouter le marqueur à la carte
 const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
 
-// Configuration de la popup
+// Ne pas ouvrir la popup automatiquement au début
+// Nous allons le faire de façon contrôlée après l'initialisation complète de la carte
+
+// Configuration du contenu de la popup
 const popupContent = `
     <div class="boutique-popup">
         <h3>GABRIEL.LE</h3>
@@ -1555,23 +1561,26 @@ const popupContent = `
     </div>
 `;
 
-const popupOptions = {
+// Attacher la popup au marqueur avec des options précises
+marker.bindPopup(popupContent, {
     closeButton: false,
-    className: 'custom-popup',
-    offset: [0, -10],
-    autoPan: true,
-    autoPanPadding: [40, 40]
-};
+    offset: [0, 0], // Pas de décalage initial
+    className: 'boutique-popup-container'
+});
 
-// Attacher la popup au marqueur
-marker.bindPopup(popupContent, popupOptions);
-
-// Ouvrir la popup après un court délai pour permettre à la carte de s'initialiser correctement
-setTimeout(() => {
-    marker.openPopup();
-    // Forcer la carte à se recentrer après l'ouverture de la popup
-    map.panTo(boutiqueLocation);
-}, 700);
+// IMPORTANT: Ouvrir la popup manuellement après chargement complet de la carte
+map.whenReady(() => {
+    // Assurer que la carte est complètement chargée
+    setTimeout(() => {
+        marker.openPopup();
+        
+        // S'assurer que la carte est bien centrée sur le marker
+        map.panTo(boutiqueLocation);
+        
+        // Forcer le recalcul de la position de la popup
+        map.invalidateSize({animate: false, pan: false});
+    }, 800); // Délai un peu plus long pour s'assurer que tout est bien chargé
+});
             
             // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
             setTimeout(() => {
