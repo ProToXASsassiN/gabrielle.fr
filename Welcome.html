@@ -1175,37 +1175,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-        function setupCollectionButtons() {
-    // Bouton "Découvrir la Collection" dans la section héro
-    const heroCollectionBtn = document.querySelector('.hero-btn');
-    if (heroCollectionBtn) {
-        heroCollectionBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Trouver le lien de navigation pour la collection
-            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
-            if (collectionNavLink) {
-                // Simuler un clic sur le lien de navigation
-                collectionNavLink.click();
-            }
-        });
-    }
-    
-    // Bouton "Voir Toute la Collection" dans la section collection
-    const fullCollectionBtn = document.querySelector('.collection-link');
-    if (fullCollectionBtn) {
-        fullCollectionBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Trouver le lien de navigation pour la collection
-            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
-            if (collectionNavLink) {
-                // Simuler un clic sur le lien de navigation
-                collectionNavLink.click();
-            }
-        });
-    }
-}
+       
     </script>
 
     <style>
@@ -1492,22 +1462,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    // Modifiez votre code JavaScript pour la carte comme suit
-
-// Voici le script complet à utiliser pour la carte Leaflet
-// Remplacez tout le script de la carte par celui-ci
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Déclaration de variable globale pour le marqueur et la carte
-    window.boutiqueMarker = null;
-    window.boutiqueMap = null;
-    
+    document.addEventListener('DOMContentLoaded', function() {
     // Configuration
     const boutiqueLocation = [48.108385, -1.677844];
     const boutiqueAdresse = "14 rue du maréchal joffre à Rennes";
     const mapZoom = 16;
     
-    // Fonction d'initialisation de la carte
+    // Création d'une fonction pour initialiser la carte avec gestion des erreurs
     function initMap() {
         try {
             // Vérifier si l'élément existe
@@ -1517,48 +1478,88 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Initialisation de la carte
+            // Initialisation de la carte avec une vérification si elle existe déjà
+            if (window.boutiqueMap) {
+                window.boutiqueMap.remove();
+            }
+            
             const map = L.map('boutique-map', {
                 zoomControl: true,
                 scrollWheelZoom: true
             }).setView(boutiqueLocation, mapZoom);
             
-            // Sauvegarder la référence de la carte dans window
             window.boutiqueMap = map;
             
-            // Ajouter la couche de tuiles CartoDB (plus fiable et plus esthétique)
+            // Alternative 1: OpenStreetMap (comme votre code initial)
+            const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 19
+            });
+            
+            // Alternative 2: CartoDB (plus fiable, également gratuit)
             const cartoDBLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 subdomains: 'abcd',
                 maxZoom: 20
-            }).addTo(map);
-            
-            // Créer un icône personnalisé pour le marqueur
-            const icon = L.divIcon({
-                className: 'custom-marker',
-                html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
-                iconSize: [24, 24],
-                iconAnchor: [12, 24]  // Point d'ancrage au centre bas de l'icône
             });
             
-            // Créer et ajouter le marqueur
-            const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
+            // Utiliser CartoDB par défaut
+            cartoDBLayer.addTo(map);
             
-            // Configurer le contenu de la popup
-            marker.bindPopup(`
-                <div style="padding:10px; width:200px;">
-                    <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
-                    <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
-                </div>
-            `);
+            // Marqueur personnalisé
+            // Remplacez complètement votre code de création du marqueur et de la popup par celui-ci:
+
+// Marqueur personnalisé avec ancrage correct
+// Gardez vos paramètres d'icône et de marqueur existants
+// Changez uniquement la partie concernant la popup
+
+// Ajout du marqueur (conservez votre icône d'origine)
+const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
+
+// Définir le contenu de la popup - conservez le même style que vous aviez
+const popupContent = `
+    <div style="padding:10px; width:200px;">
+        <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
+        <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
+    </div>
+`;
+
+// Lier la popup au marqueur mais NE PAS l'ouvrir immédiatement
+marker.bindPopup(popupContent);
+
+// Attendre que la carte soit complètement chargée
+map.on('load', () => {
+    setTimeout(() => {
+        // S'assurer que la carte est bien centrée
+        map.panTo(boutiqueLocation);
+        
+        // Ouvrir la popup avec un petit délai
+        marker.openPopup();
+    }, 500);
+});
+
+// Si l'événement 'load' n'est pas fiable, utilisez également whenReady et un timer de secours
+map.whenReady(() => {
+    setTimeout(() => {
+        if (!marker.isPopupOpen()) {
+            map.panTo(boutiqueLocation);
+            marker.openPopup();
+        }
+    }, 800);
+});
+
+// Timer de secours - s'assure que la popup s'ouvre même si les autres méthodes échouent
+setTimeout(() => {
+    if (!marker.isPopupOpen()) {
+        map.panTo(boutiqueLocation);
+        marker.openPopup();
+    }
+}, 1200);
             
-            // Sauvegarder la référence du marqueur dans window
-            window.boutiqueMarker = marker;
-            
-            // S'assurer que la carte se redimensionne correctement
+            // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
             setTimeout(() => {
                 map.invalidateSize(true);
-            }, 500);
+            }, 1500);
             
             return map;
         } catch (error) {
@@ -1566,55 +1567,111 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialiser la carte après un court délai pour s'assurer que le DOM est prêt
-    setTimeout(() => {
-        initMap();
-    }, 300);
+    // Initialiser la carte
+    const map = initMap();
     
-    // Gestion du redimensionnement de la fenêtre
+    // Ajouter des gestionnaires pour les événements de redimensionnement
     window.addEventListener('resize', function() {
         if (window.boutiqueMap) {
             window.boutiqueMap.invalidateSize(true);
         }
     });
     
-    // Gestion du clic sur le lien "Contact"
-    const contactLink = document.querySelector('a[href="#contact"]');
-    if (contactLink) {
-        contactLink.addEventListener('click', function(e) {
-            // Attendre que la page de contact soit affichée
+    // Si la carte est dans un onglet, s'assurer qu'elle se recalcule lorsque l'onglet devient visible
+    document.addEventListener('click', function(e) {
+        if (e.target && (e.target.getAttribute('data-toggle') === 'tab' || e.target.closest('[data-toggle="tab"]'))) {
             setTimeout(() => {
-                // Réinitialiser la carte si nécessaire
-                if (!window.boutiqueMap || !window.boutiqueMarker) {
-                    initMap();
+                if (window.boutiqueMap) {
+                    window.boutiqueMap.invalidateSize(true);
                 }
-                
-                // Simuler un clic sur le marqueur pour ouvrir la popup après un délai
-                setTimeout(() => {
-                    if (window.boutiqueMarker) {
-                        window.boutiqueMarker.openPopup();
-                    }
-                    
-                    if (window.boutiqueMap) {
-                        window.boutiqueMap.invalidateSize(true);
-                    }
-                }, 500);
-            }, 300);
-        });
-    }
+            }, 100);
+        }
+    });
+});
+
+
     
-    // Gestion du clic sur le bouton "Prendre Rendez-vous"
-    const rdvButton = document.querySelector('.testimonial-btn.btn-secondary');
-    if (rdvButton) {
-        rdvButton.addEventListener('click', function(e) {
-            // Trouver et cliquer sur le lien de navigation Contact
-            const contactNavLink = document.querySelector('.nav-links a[href="#contact"]');
-            if (contactNavLink) {
-                contactNavLink.click();
+
+// Réexécuter lors du redimensionnement
+window.addEventListener('resize', setupMobileNavigation);
+
+// Ajoutez également cette fonction pour améliorer le défilement sur mobile
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Défilement doux vers la cible
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // Ajustement pour la barre de navigation
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+
+
+
+
+    // Cette fonction gère les clics sur les boutons "Découvrir la Collection" et "Voir Toute la Collection"
+function setupCollectionButtons() {
+    console.log("Setting up collection buttons"); // Aide au débogage
+    
+    // Bouton "Découvrir la Collection" dans la section héro
+    const heroCollectionBtn = document.querySelector('.hero-btn');
+    if (heroCollectionBtn) {
+        console.log("Hero button found"); // Aide au débogage
+        heroCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log("Hero button clicked"); // Aide au débogage
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+                console.log("Redirected to collection"); // Aide au débogage
+            } else {
+                console.log("Collection link not found"); // Aide au débogage
             }
         });
+    } else {
+        console.log("Hero button not found"); // Aide au débogage
     }
-});</script>
+    
+    // Bouton "Voir Toute la Collection" dans la section collection
+    const fullCollectionBtn = document.querySelector('.collection-link');
+    if (fullCollectionBtn) {
+        console.log("Full collection button found"); // Aide au débogage
+        fullCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log("Full collection button clicked"); // Aide au débogage
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+                console.log("Redirected to collection page"); // Aide au débogage
+            } else {
+                console.log("Collection link not found"); // Aide au débogage
+            }
+        });
+    } else {
+        console.log("Full collection button not found"); // Aide au débogage
+    }
+}
+
+// Appeler la fonction au chargement du document
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM content loaded, setting up buttons"); // Aide au débogage
+    setupCollectionButtons();
+});
+</script>
 
 <style>
     /* Styles améliorés pour la popup de la carte */
