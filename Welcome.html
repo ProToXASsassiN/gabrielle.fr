@@ -1540,47 +1540,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             // Remplacez complètement votre code de création du marqueur et de la popup par celui-ci:
 
 // Marqueur personnalisé avec ancrage correct
-const icon = L.divIcon({
-    className: 'custom-marker',
-    html: '<div style="background-color:#c04caa;width:20px;height:20px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
-    iconSize: [20, 20],
-    iconAnchor: [10, 10] // point central exact
-});
+// Gardez vos paramètres d'icône et de marqueur existants
+// Changez uniquement la partie concernant la popup
 
-// Ajouter le marqueur à la carte
+// Ajout du marqueur (conservez votre icône d'origine)
 const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
 
-// Ne pas ouvrir la popup automatiquement au début
-// Nous allons le faire de façon contrôlée après l'initialisation complète de la carte
-
-// Configuration du contenu de la popup
+// Définir le contenu de la popup - conservez le même style que vous aviez
 const popupContent = `
-    <div class="boutique-popup">
-        <h3>GABRIEL.LE</h3>
-        <p>${boutiqueAdresse}</p>
+    <div style="padding:10px; width:200px;">
+        <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
+        <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
     </div>
 `;
 
-// Attacher la popup au marqueur avec des options précises
-marker.bindPopup(popupContent, {
-    closeButton: false,
-    offset: [0, 0], // Pas de décalage initial
-    className: 'boutique-popup-container'
-});
+// Lier la popup au marqueur mais NE PAS l'ouvrir immédiatement
+marker.bindPopup(popupContent);
 
-// IMPORTANT: Ouvrir la popup manuellement après chargement complet de la carte
-map.whenReady(() => {
-    // Assurer que la carte est complètement chargée
+// Attendre que la carte soit complètement chargée
+map.on('load', () => {
     setTimeout(() => {
-        marker.openPopup();
-        
-        // S'assurer que la carte est bien centrée sur le marker
+        // S'assurer que la carte est bien centrée
         map.panTo(boutiqueLocation);
         
-        // Forcer le recalcul de la position de la popup
-        map.invalidateSize({animate: false, pan: false});
-    }, 800); // Délai un peu plus long pour s'assurer que tout est bien chargé
+        // Ouvrir la popup avec un petit délai
+        marker.openPopup();
+    }, 500);
 });
+
+// Si l'événement 'load' n'est pas fiable, utilisez également whenReady et un timer de secours
+map.whenReady(() => {
+    setTimeout(() => {
+        if (!marker.isPopupOpen()) {
+            map.panTo(boutiqueLocation);
+            marker.openPopup();
+        }
+    }, 800);
+});
+
+// Timer de secours - s'assure que la popup s'ouvre même si les autres méthodes échouent
+setTimeout(() => {
+    if (!marker.isPopupOpen()) {
+        map.panTo(boutiqueLocation);
+        marker.openPopup();
+    }
+}, 1200);
             
             // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
             setTimeout(() => {
