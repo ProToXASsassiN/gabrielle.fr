@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#c04caa">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Lingerie de Luxe - Élégance Intemporelle</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
@@ -48,13 +52,14 @@
         }
         
         .logo {
-            margin-left: 665px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             color: var(--primary);
             text-decoration: none;
-            display: flex;
-            align-items: center;
+            margin: 0 auto; /* Centre horizontalement */
         }
         
         .logo img {
@@ -69,6 +74,7 @@
         
         .nav-links {
             display: flex;
+            justify-content: center; /* Centre les liens */
             gap: 35px;
         }
         
@@ -538,6 +544,129 @@
             background-color: transparent;
             border: 1px solid var(--primary);
         }
+        /* --- MEDIA QUERIES POUR RESPONSIVE --- */
+@media screen and (max-width: 1024px) {
+    .values {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    .value-item {
+        margin-left: 0 !important; /* Supprime le décalage des éléments de valeur */
+    }
+    
+    .collection-grid {
+        gap: 20px;
+    }
+    
+    .testimonial-quote {
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-quote::before,
+    .testimonial-quote::after {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Navigation */
+    nav {
+        flex-direction: column;
+        padding: 10px 5%;
+    }
+    
+    .nav-links {
+        margin-top: 10px;
+        gap: 20px;
+    }
+    
+    .logo img {
+        height: 80px;
+    }
+    
+    /* Hero */
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    /* Collection */
+    .collection-grid {
+        justify-content: center;
+    }
+    
+    /* Testimonial */
+    .testimonial-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    /* Contact page */
+    .contact-content {
+        flex-direction: column;
+    }
+    
+    .contact-form {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Navigation */
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 0.8rem;
+    }
+    
+    /* Hero */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-btn {
+        padding: 10px 20px;
+    }
+    
+    /* Values */
+    .value-item {
+        max-width: 90%;
+    }
+    
+    /* Collection */
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    /* Product grid */
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Contact */
+    .contact-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .contact-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .contact-hours {
+        text-align: center;
+    }
+}
     </style>
 </head>
 <body>
@@ -961,6 +1090,48 @@ window.addEventListener('load', () => {
         setActiveLink(homeLink);
         showPage('accueil');
     }
+});
+
+
+        // Ajoutez ce code à votre section script existante
+
+// Fonction pour fermer automatiquement la navigation sur mobile après un clic
+function setupMobileNavigation() {
+    // Seulement appliquer aux petits écrans (moins de 768px)
+    if (window.innerWidth <= 768) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Effet visuel de clic
+                link.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    link.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    }
+}
+
+// Exécuter la configuration au chargement
+window.addEventListener('load', setupMobileNavigation);
+// Réexécuter lors du redimensionnement
+window.addEventListener('resize', setupMobileNavigation);
+
+// Ajoutez également cette fonction pour améliorer le défilement sur mobile
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Défilement doux vers la cible
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // Ajustement pour la barre de navigation
+                behavior: 'smooth'
+            });
+        }
+    });
 });
     </script>
 
