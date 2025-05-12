@@ -35,25 +35,39 @@
         /* --- NAVIGATION --- */
         
         
-        nav.scrolled {
-            padding: 10px 5%;
-        }
-        
-        nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px 5%;
+       /* --- SOLUTION COMPLÈTE POUR LA NAVIGATION --- */
+
+/* D'abord, réinitialisons complètement le style de la navigation */
+nav {
+    position: fixed;
     width: 100%;
+    background-color: rgba(254, 248, 255, 0.95);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    padding: 0;
+    display: block; /* Important: changement de flex à block */
 }
 
-.logo {
+/* Container du logo pour assurer un centrage parfait */
+.logo-container {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    text-align: center;
     padding: 10px 0;
+}
+
+/* Style du logo */
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo img {
@@ -61,62 +75,75 @@
     transition: var(--transition);
 }
 
-/* Assurez-vous que la barre de navigation est bien centrée également */
+/* Container des liens de navigation */
+.nav-links-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: rgba(254, 248, 255, 0.95);
+}
+
+/* Style des liens */
 .nav-links {
     display: flex;
     justify-content: center;
-    width: 100%;
     gap: 35px;
-    padding: 5px 0;
 }
-        
-        nav.scrolled .logo img {
-            height: 100px;
-        }
-        
-        
-        
-        .nav-links a {
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            transition: var(--transition);
-        }
-        
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            transition: var(--transition);
-        }
-        
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-        
-        .nav-links a[href="#accueil"] {
-            color: var(--secondary);
-        }
-        
-        .nav-links a[href="#accueil"]:after {
-            background-color: var(--secondary);
-        }
-        
-        .nav-links a[href="#services"],
-        .nav-links a[href="#contact"] {
-            color: var(--primary);
-        }
-        
-        .nav-links a[href="#services"]:after,
-        .nav-links a[href="#contact"]:after {
-            background-color: var(--primary);
-        }
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    transition: var(--transition);
+}
+
+/* Reste du style des liens inchangé... */
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    transition: var(--transition);
+}
+
+.nav-links a:hover:after {
+    width: 100%;
+}
+
+.nav-links a[href="#accueil"] {
+    color: var(--secondary);
+}
+
+.nav-links a[href="#accueil"]:after {
+    background-color: var(--secondary);
+}
+
+.nav-links a[href="#services"],
+.nav-links a[href="#contact"] {
+    color: var(--primary);
+}
+
+.nav-links a[href="#services"]:after,
+.nav-links a[href="#contact"]:after {
+    background-color: var(--primary);
+}
+
+/* Adaptation pour mobile */
+@media screen and (max-width: 768px) {
+    .logo img {
+        height: 80px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+}
         
         /* --- HERO SECTION --- */
         .hero {
@@ -684,17 +711,21 @@
     <div class="cursor"></div>
     
     <!-- Navigation -->
-    <nav id="navbar">
+    <!-- Navigation restructurée -->
+<nav id="navbar">
+    <div class="logo-container">
         <a href="#accueil" class="logo">
             <img src="image-removebg-preview.png" alt="Logo">
-            
         </a>
+    </div>
+    <div class="nav-links-container">
         <div class="nav-links">
             <a href="#accueil" class="active">Accueil</a>
             <a href="#services">Collection</a>
             <a href="#contact">Contact</a>
         </div>
-    </nav>
+    </div>
+</nav>
     
     <!-- Hero Section -->
     <section class="hero" id="accueil">
