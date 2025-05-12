@@ -545,6 +545,7 @@
             border: 1px solid var(--primary);
         }
         /* --- MEDIA QUERIES POUR RESPONSIVE --- */
+/* --- MEDIA QUERIES POUR RESPONSIVE --- */
 @media screen and (max-width: 1024px) {
     .values {
         flex-direction: column;
@@ -596,6 +597,12 @@
         padding: 0 20px;
     }
     
+    /* Collection et contact titres */
+    #services .section-title,
+    #contact .section-title {
+        margin-top: 30px;
+    }
+    
     /* Collection */
     .collection-grid {
         justify-content: center;
@@ -614,6 +621,11 @@
     
     .contact-form {
         padding: 20px;
+    }
+    
+    /* Désactiver le curseur personnalisé sur mobile */
+    .cursor {
+        display: none;
     }
 }
 
@@ -881,7 +893,7 @@
                     </div>
                     <div>
                         <h3>Notre Boutique</h3>
-                        <p>14 rue du maréchal joffre - Rennes</p>
+                        <p>14 rue du maréchal joffre à Rennes</p>
                     </div>
                 </div>
                 
@@ -1133,6 +1145,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+        function setupCollectionButtons() {
+    // Bouton "Découvrir la Collection" dans la section héro
+    const heroCollectionBtn = document.querySelector('.hero-btn');
+    if (heroCollectionBtn) {
+        heroCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+            }
+        });
+    }
+    
+    // Bouton "Voir Toute la Collection" dans la section collection
+    const fullCollectionBtn = document.querySelector('.collection-link');
+    if (fullCollectionBtn) {
+        fullCollectionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver le lien de navigation pour la collection
+            const collectionNavLink = document.querySelector('.nav-links a[href="#services"]');
+            if (collectionNavLink) {
+                // Simuler un clic sur le lien de navigation
+                collectionNavLink.click();
+            }
+        });
+    }
+}
     </script>
 
     <style>
@@ -1422,7 +1466,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     document.addEventListener('DOMContentLoaded', function() {
     // Configuration
     const boutiqueLocation = [48.108385, -1.677844];
-    const boutiqueAdresse = "adresse a renne";
+    const boutiqueAdresse = "14 rue du maréchal joffre à Rennes";
     const mapZoom = 16;
     
     // Création d'une fonction pour initialiser la carte avec gestion des erreurs
@@ -1531,6 +1575,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     window.boutiqueMap.invalidateSize(true);
                 }
             }, 100);
+        }
+    });
+});
+
+
+    window.addEventListener('load', function() {
+    setupMobileNavigation();
+    setupCollectionButtons();
+});
+
+// Réexécuter lors du redimensionnement
+window.addEventListener('resize', setupMobileNavigation);
+
+// Ajoutez également cette fonction pour améliorer le défilement sur mobile
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Défilement doux vers la cible
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // Ajustement pour la barre de navigation
+                behavior: 'smooth'
+            });
         }
     });
 });
