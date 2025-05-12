@@ -1175,8 +1175,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-        function setupCollectionButtons() {
-    // Bouton "Découvrir la Collection" dans la section héro
+      // Remplacer entièrement votre fonction setupCollectionButtons() par celle-ci
+
+function setupNavigationButtons() {
+    // === BOUTONS DE COLLECTION ===
+    
+    // Bouton "Découvrir la Collection" dans la section hero
     const heroCollectionBtn = document.querySelector('.hero-btn');
     if (heroCollectionBtn) {
         heroCollectionBtn.addEventListener('click', function(e) {
@@ -1205,7 +1209,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             }
         });
     }
+    
+    // === BOUTON RENDEZ-VOUS ===
+    
+    // Bouton "Prendre Rendez-vous" dans la section testimonial
+    const rendezVousBtn = document.querySelector('.testimonial-btn.btn-secondary');
+    if (rendezVousBtn) {
+        rendezVousBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver le lien de navigation pour le contact
+            const contactNavLink = document.querySelector('.nav-links a[href="#contact"]');
+            if (contactNavLink) {
+                // Simuler un clic sur le lien de navigation
+                contactNavLink.click();
+            }
+        });
+    }
 }
+
+// S'assurer que la fonction est appelée au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    setupNavigationButtons();
+});
     </script>
 
     <style>
@@ -1492,13 +1518,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    // Remplacez entièrement votre section pour la carte par celle-ci
+// (remplacez tout le script qui commence par document.addEventListener('DOMContentLoaded', function() { concernant la carte)
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Déclaration des variables globales
+    window.boutiqueMarker = null;
+    window.boutiqueMap = null;
+    
     // Configuration
     const boutiqueLocation = [48.108385, -1.677844];
     const boutiqueAdresse = "14 rue du maréchal joffre à Rennes";
     const mapZoom = 16;
     
-    // Création d'une fonction pour initialiser la carte avec gestion des erreurs
+    // Fonction d'initialisation de la carte
     function initMap() {
         try {
             // Vérifier si l'élément existe
@@ -1508,88 +1541,56 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 return;
             }
             
-            // Initialisation de la carte avec une vérification si elle existe déjà
+            // Supprimer la carte existante si elle existe
             if (window.boutiqueMap) {
                 window.boutiqueMap.remove();
             }
             
+            // Créer la carte
             const map = L.map('boutique-map', {
                 zoomControl: true,
                 scrollWheelZoom: true
             }).setView(boutiqueLocation, mapZoom);
             
+            // Sauvegarder la référence
             window.boutiqueMap = map;
             
-            // Alternative 1: OpenStreetMap (comme votre code initial)
-            const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                maxZoom: 19
-            });
-            
-            // Alternative 2: CartoDB (plus fiable, également gratuit)
+            // Ajouter la couche de tuiles
             const cartoDBLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
                 subdomains: 'abcd',
                 maxZoom: 20
+            }).addTo(map);
+            
+            // Créer l'icône personnalisée
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
             });
             
-            // Utiliser CartoDB par défaut
-            cartoDBLayer.addTo(map);
+            // Créer et ajouter le marqueur
+            const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
             
-            // Marqueur personnalisé
-            // Remplacez complètement votre code de création du marqueur et de la popup par celui-ci:
-
-// Marqueur personnalisé avec ancrage correct
-// Gardez vos paramètres d'icône et de marqueur existants
-// Changez uniquement la partie concernant la popup
-
-// Ajout du marqueur (conservez votre icône d'origine)
-const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
-
-// Définir le contenu de la popup - conservez le même style que vous aviez
-const popupContent = `
-    <div style="padding:10px; width:200px;">
-        <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
-        <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
-    </div>
-`;
-
-// Lier la popup au marqueur mais NE PAS l'ouvrir immédiatement
-marker.bindPopup(popupContent);
-
-// Attendre que la carte soit complètement chargée
-map.on('load', () => {
-    setTimeout(() => {
-        // S'assurer que la carte est bien centrée
-        map.panTo(boutiqueLocation);
-        
-        // Ouvrir la popup avec un petit délai
-        marker.openPopup();
-    }, 500);
-});
-
-// Si l'événement 'load' n'est pas fiable, utilisez également whenReady et un timer de secours
-map.whenReady(() => {
-    setTimeout(() => {
-        if (!marker.isPopupOpen()) {
-            map.panTo(boutiqueLocation);
-            marker.openPopup();
-        }
-    }, 800);
-});
-
-// Timer de secours - s'assure que la popup s'ouvre même si les autres méthodes échouent
-setTimeout(() => {
-    if (!marker.isPopupOpen()) {
-        map.panTo(boutiqueLocation);
-        marker.openPopup();
-    }
-}, 1200);
+            // Configurer le contenu de la popup
+            const popupContent = `
+                <div style="padding:10px; width:200px;">
+                    <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
+                    <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
+                </div>
+            `;
             
-            // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
+            // Attacher la popup au marqueur mais ne pas l'ouvrir automatiquement
+            marker.bindPopup(popupContent);
+            
+            // Sauvegarder la référence
+            window.boutiqueMarker = marker;
+            
+            // S'assurer que la carte a la bonne taille
             setTimeout(() => {
                 map.invalidateSize(true);
-            }, 1500);
+            }, 500);
             
             return map;
         } catch (error) {
@@ -1597,51 +1598,49 @@ setTimeout(() => {
         }
     }
     
-    // Initialiser la carte
-    const map = initMap();
+    // Initialiser la carte quand l'onglet Contact est affiché
+    const contactLink = document.querySelector('.nav-links a[href="#contact"]');
+    if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+            // Attendre que la page de contact soit affichée
+            setTimeout(() => {
+                // Initialiser la carte si elle n'existe pas
+                if (!window.boutiqueMap) {
+                    initMap();
+                }
+                
+                // Après un court délai, ouvrir la popup
+                setTimeout(() => {
+                    if (window.boutiqueMarker) {
+                        window.boutiqueMarker.openPopup();
+                    }
+                    
+                    if (window.boutiqueMap) {
+                        window.boutiqueMap.invalidateSize(true);
+                    }
+                }, 500);
+            }, 300);
+        });
+    }
     
-    // Ajouter des gestionnaires pour les événements de redimensionnement
+    // Si le bouton "Prendre rendez-vous" est cliqué
+    const rendezVousBtn = document.querySelector('.testimonial-btn.btn-secondary');
+    if (rendezVousBtn) {
+        rendezVousBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Trouver et cliquer sur le lien de navigation Contact
+            const contactNavLink = document.querySelector('.nav-links a[href="#contact"]');
+            if (contactNavLink) {
+                contactNavLink.click();
+            }
+        });
+    }
+    
+    // Gestion du redimensionnement
     window.addEventListener('resize', function() {
         if (window.boutiqueMap) {
             window.boutiqueMap.invalidateSize(true);
-        }
-    });
-    
-    // Si la carte est dans un onglet, s'assurer qu'elle se recalcule lorsque l'onglet devient visible
-    document.addEventListener('click', function(e) {
-        if (e.target && (e.target.getAttribute('data-toggle') === 'tab' || e.target.closest('[data-toggle="tab"]'))) {
-            setTimeout(() => {
-                if (window.boutiqueMap) {
-                    window.boutiqueMap.invalidateSize(true);
-                }
-            }, 100);
-        }
-    });
-});
-
-
-    window.addEventListener('load', function() {
-    setupMobileNavigation();
-    setupCollectionButtons();
-});
-
-// Réexécuter lors du redimensionnement
-window.addEventListener('resize', setupMobileNavigation);
-
-// Ajoutez également cette fonction pour améliorer le défilement sur mobile
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            // Défilement doux vers la cible
-            window.scrollTo({
-                top: targetElement.offsetTop - 80, // Ajustement pour la barre de navigation
-                behavior: 'smooth'
-            });
         }
     });
 });
@@ -1651,6 +1650,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 <style>
+    /* Ce style doit être ajouté à votre section <style> à la fin */
+
+/* Correction des marges des titres de page */
+.page .section-title {
+    margin-top: 40px;
+    padding-top: 60px;
+}
+
+/* Adaptation pour mobile */
+@media screen and (max-width: 768px) {
+    .page .section-title {
+        margin-top: 20px;
+        padding-top: 40px;
+    }
+}
+
+/* Style de la page active */
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    min-height: 100vh;
+}
     /* Styles améliorés pour la popup de la carte */
 /* Reset complet des styles de popup Leaflet */
 .leaflet-popup {
