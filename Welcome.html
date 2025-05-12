@@ -1548,12 +1548,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
             
             // Infobulle
-            marker.bindPopup(`
-                <div style="padding:10px; width:200px;">
-                    <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
-                    <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
-                </div>
-            `).openPopup();
+            // Infobulle améliorée avec classe CSS
+marker.bindPopup(`
+    <div class="boutique-popup">
+        <h3>GABRIEL.LE</h3>
+        <p>${boutiqueAdresse}</p>
+    </div>
+`, {
+    // Options de la popup
+    closeButton: false,           // Supprime le bouton de fermeture
+    className: 'custom-popup',    // Classe personnalisée pour styliser
+    offset: [0, -15],             // Ajuste la position verticale
+    autoPan: true,                // Centre la carte sur la popup
+    autoPanPadding: [40, 40]      // Marge autour lors du centrage
+}).openPopup();
             
             // Événement de chargement complet des tuiles
             map.on('load', function() {
@@ -1637,9 +1645,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 </script>
 
 <style>
-    .leaflet-popup-content-wrapper{
-        width: 200px;
-    }
+    .leaflet-popup-content-wrapper {
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    overflow: hidden;
+}
+    .leaflet-popup-content {
+    margin: 0;
+    width: 100% !important;
+}
+
+/* Style pour le contenu de la popup */
+.boutique-popup {
+    padding: 15px;
+    text-align: center;
+}
+
+.boutique-popup h3 {
+    color: var(--primary);
+    margin: 0 0 8px 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.boutique-popup p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Ajuster la position de la flèche pour qu'elle sorte du point */
+.leaflet-popup-tip-container {
+    margin-left: -11px; /* Ajustement horizontal */
+}
+
+.leaflet-popup-tip {
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
     .contact-map {
         width: 100%;
         margin: 20px 0;
