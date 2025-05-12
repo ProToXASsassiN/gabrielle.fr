@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingerie de Luxe - Élégance Intemporelle</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+        
+        :root {
+            --primary: #c04caa;
+            --secondary: #77a666;
+            --light: #fef8ff;
+            --dark: #333333;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+        
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 5%;
+            background-color: rgba(254, 248, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        nav.scrolled {
+            padding: 10px 5%;
+        }
+        
+        .logo {
+            margin-left: 665px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 100px;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        nav.scrolled .logo img {
+            height: 100px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a[href="#accueil"] {
+            color: var(--secondary);
+        }
+        
+        .nav-links a[href="#accueil"]:after {
+            background-color: var(--secondary);
+        }
+        
+        .nav-links a[href="#services"],
+        .nav-links a[href="#contact"] {
+            color: var(--primary);
+        }
+        
+        .nav-links a[href="#services"]:after,
+        .nav-links a[href="#contact"]:after {
+            background-color: var(--primary);
+        }
+        
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/image.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(192, 76, 170, 0.2) 0%, rgba(119, 166, 102, 0.2) 100%);
+            top: -50%;
+            left: -50%;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hero-content {
+            z-index: 10;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s forwards 0.5s;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+            font-style: italic;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .hero-btn:hover {
+            color: var(--primary);
+        }
+        
+        .hero-btn:hover::before {
+            left: 0;
+        }
+        
+        /* --- BRAND VALUES --- */
+        .values {
+            display: flex;
+            justify-content: space-around;
+            padding: 100px 10%;
+            background: var(--light);
+        }
+        
+        .value-item {
+            text-align: center;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        
+        .value-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .value-icon {
+            background: var(--primary);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 20px rgba(192, 76, 170, 0.2);
+            transition: var(--transition);
+        }
+        
+        .value-item:nth-child(2) .value-icon {
+            background: var(--secondary);
+            box-shadow: 0 10px 20px rgba(119, 166, 102, 0.2);
+        }
+        
+        .value-item:hover .value-icon {
+            transform: translateY(-10px);
+        }
+        
+        .value-icon span {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .value-item h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .value-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* --- COLLECTION HIGHLIGHT --- */
+        .collection {
+            padding: 120px 10%;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .collection p {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            color: #666;
+        }
+        
+        .collection-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .collection-item {
+            width: 280px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .collection-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .collection-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .collection-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .collection-item:hover .collection-overlay {
+            transform: translateY(0);
+        }
+        
+        .collection-item:hover .collection-img {
+            transform: scale(1.1);
+        }
+        
+        .collection-name {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .collection-price {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .collection-link {
+            display: inline-block;
+            margin-top: 60px;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 12px 30px;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collection-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .collection-link:hover {
+            color: white;
+        }
+        
+        .collection-link:hover::before {
+            left: 0;
+        }
+        
+        /* --- TESTIMONIAL --- */
+        .testimonial {
+            background: #f9f0fa;
+            padding: 100px 10%;
+            text-align: center;
+        }
+        
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        
+        .testimonial-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .testimonial-quote::before,
+        .testimonial-quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-quote::before {
+            top: -30px;
+            left: -20px;
+        }
+        
+        .testimonial-quote::after {
+            bottom: -60px;
+            right: -20px;
+        }
+        
+        .testimonial-source {
+            color: #777;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+        
+        .testimonial-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .testimonial-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #a83896;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(168, 56, 150, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5d8a4f;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(93, 138, 79, 0.3);
+        }
+
+        /* --- SCROLL REVEAL --- */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+        
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- CURSOR EFFECT --- */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            opacity: 0.5;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+        }
+        
+        .cursor.grow {
+            transform: translate(-50%, -50%) scale(2);
+            background-color: transparent;
+            border: 1px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#accueil" class="logo">
+            <img src="image-removebg-preview.png" alt="Logo">
+            
+        </a>
+        <div class="nav-links">
+            <a href="#accueil" class="active">Accueil</a>
+            <a href="#services">Collection</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>titre <span>lingerie</span> Luxueuse</h1>
+            <p>Découvrez des pièces uniques où confort rime avec élégance.</p>
+            <a href="#services" class="hero-btn">Découvrir la Collection</a>
+        </div>
+    </section>
+    
+    <!-- Brand Values -->
+    <section class="values">
+        <div class="value-item scroll-reveal">
+            <div class="value-icon">
+                <span>✿</span>
+            </div>
+            <h3>Savoir-Faire</h3>
+            <p>valeur description etc</p>
+        </div>
+        
+        <div class="value-item scroll-reveal" style="transition-delay: 0.2s; margin-left: 80px;">
+            <div class="value-icon">
+                <span>♻</span>
+            </div>
+            <h3>valeur description etc</h3>
+            <p>jsp si c'est eco sur un mal entendu mdr</p>
+        </div>
+        
+        <div class="value-item scroll-reveal" style="transition-delay: 0.4s;">
+            <div class="value-icon">
+                <span>✧</span>
+            </div>
+            <h3>Sur-Mesure</h3>
+            <p>Service personnalisé pour chaque morphologie, parce que la perfection réside dans les détails.</p>
+        </div>
+    </section>
+    
+    <!-- Collection Highlight -->
+    <section class="collection">
+        <h2 class="section-title scroll-reveal">La nouvelle <span>collection</span></h2>
+        <p class="scroll-reveal">vous ferai la pipelette mdr </p>
+        
+        <div class="collection-grid">
+            <div class="collection-item scroll-reveal">
+                <img src="image.png" alt="" class="collection-img">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">nom de l'article</h3>
+                    <!-- <p class="collection-price">189€</p> -->
+                </div>
+            </div>
+            
+            <div class="collection-item scroll-reveal" style="transition-delay: 0.2s;">
+                <img src="image-removebg-preview.png" alt="" class="collection-img">
+                <div class="collection-overlay">
+                    <h3 class="collection-name">nom de l'article</h3>
+                    <!-- <p class="collection-price">219€</p> -->
+                </div>
+            </div>
+        </div>
+        
+        <a href="#services" class="collection-link scroll-reveal">Voir Toute la Collection</a>
+    </section>
+    
+    <!-- Testimonial -->
+    <section class="testimonial">
+        <div class="testimonial-content scroll-reveal">
+            <p class="testimonial-quote">Une lingerie qui célèbre le corps féminin avec grâce et sophistication.</p>
+            <p class="testimonial-source">— Marie Claire, Éditorial Elle</p>
+            
+            <div class="testimonial-buttons">
+                <a href="#contact" class="testimonial-btn btn-secondary">Prendre Rendez-vous</a>
+                <a href="#" class="testimonial-btn btn-primary">Guide des Tailles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Collection (page séparée) -->
+<section id="services" class="page">
+    <div class="collection-container">
+        <h2 class="section-title scroll-reveal">Notre <span>Collection</span></h2>
+        <p class="scroll-reveal">Explorez notre gamme exclusive de lingerie de luxe, conçue pour sublimer chaque silhouette avec élégance et raffinement.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="image.png" alt="" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Ensemble en dentelle française et soie, rehaussé de broderies florales délicates. Confort absolu et silhouette magnifiée.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                            <!-- <a href="#" class="product-btn">Ajouter au panier</a> -->
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">nom de l'article</h3>
+                <!-- <p class="product-price">189€</p> -->
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Body en soie biologique et dentelle recyclée. Coupe parfaite et maintien idéal pour une silhouette affinée.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                            <!-- <a href="#" class="product-btn">Ajouter au panier</a> -->
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">nom de l'article</h3>
+                <!-- <p class="product-price">219€</p> -->
+            </div>
+            
+            <!-- Produit 3 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.2s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Ensemble raffiné en satin de soie et dentelle Calais. Confort inégalé et élégance intemporelle pour toutes les occasions.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                            <!-- <a href="#" class="product-btn">Ajouter au panier</a> -->
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">nom de l'article</h3>
+                <!-- <p class="product-price">245€</p> -->
+            </div>
+            
+            <!-- Produit 4 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.3s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Nuisette en soie pure et dentelle Leavers. Tombé impeccable et sensualité raffinée pour des nuits d'exception.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                            <!-- <a href="#" class="product-btn">Ajouter au panier</a> -->
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">nom de l'article</h3>
+                <!-- <p class="product-price">175€</p> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Contact -->
+<section id="contact" class="page">
+    <div class="contact-container">
+        <h2 class="section-title scroll-reveal">Contactez <span>Nous</span></h2>
+        <p class="scroll-reveal">Pour toute demande personnalisée ou rendez-vous dans notre atelier-boutique à Paris.</p>
+        
+        <div class="contact-content">
+            <div class="contact-info scroll-reveal">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <span>📍</span>
+                    </div>
+                    <div>
+                        <h3>Notre Boutique</h3>
+                        <p>14 rue du maréchal joffre - Rennes</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <span>📞</span>
+                    </div>
+                    <div>
+                        <h3>Téléphone</h3>
+                        <p>+33 2 06 67 04 20</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <span>✉️</span>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>gabriellelingerie@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-hours">
+                    <h3>Horaires d'Ouverture</h3>
+                    <p>Lundi - Samedi: 10h00 - 19h00</p>
+                    <p>Dimanche: Fermé</p>
+                </div>
+            </div>
+            
+            <form class="contact-form scroll-reveal">
+                <div class="form-group">
+                    <input type="text" placeholder="Votre Nom" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Votre Email" required>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="" disabled selected>Objet de votre message</option>
+                        <option value="order">Question sur une commande</option>
+                        <option value="custom">Création sur mesure</option>
+                        <option value="appointment">Prise de rendez-vous</option>
+                        <option value="other">Autre demande</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Votre Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer</button>
+            </form>
+            <div class="contact-map">
+                <div class="map-container">
+                    <div id="boutique-map" style="width: 100%; height: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll Reveal Animation
+        const scrollElements = document.querySelectorAll('.scroll-reveal');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+        
+        const displayScrollElement = element => {
+            element.classList.add('visible');
+        };
+        
+        const hideScrollElement = element => {
+            element.classList.remove('visible');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach(el => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                } else {
+                    hideScrollElement(el);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // Trigger once on load
+        window.addEventListener('load', () => {
+            handleScrollAnimation();
+        });
+        
+        // Custom Cursor Effect
+        const cursor = document.querySelector('.cursor');
+        const links = document.querySelectorAll('a');
+        
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('grow');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('grow');
+            });
+        });
+        
+        // Hide cursor when it leaves the window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '0.5';
+        });
+        // Navigation System
+const navLinks = document.querySelectorAll('.nav-links a');
+const pages = document.querySelectorAll('.page');
+const heroSection = document.querySelector('.hero');
+
+// Set active nav link
+const setActiveLink = (clickedLink) => {
+    navLinks.forEach(link => link.classList.remove('active'));
+    clickedLink.classList.add('active');
+};
+
+// Show selected page and hide others
+const showPage = (pageId) => {
+    // First handle the hero section specially
+    if (pageId === 'accueil') {
+        heroSection.style.display = 'flex';
+        document.querySelector('.values').style.display = 'flex';
+        document.querySelector('.collection').style.display = 'block';
+        document.querySelector('.testimonial').style.display = 'block';
+    } else {
+        heroSection.style.display = 'none';
+        document.querySelector('.values').style.display = 'none';
+        document.querySelector('.collection').style.display = 'none';
+        document.querySelector('.testimonial').style.display = 'none';
+    }
+    
+    // Then handle the pages
+    pages.forEach(page => {
+        if (page.id === pageId) {
+            page.classList.add('active');
+            
+            // Reset scroll position to top when changing pages
+            window.scrollTo(0, 0);
+            
+            // Trigger animations for the active page
+            const animations = page.querySelectorAll('.scroll-reveal');
+            animations.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 100);
+            });
+        } else {
+            page.classList.remove('active');
+        }
+    });
+};
+
+// Add click event to nav links
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pageId = link.getAttribute('href').substring(1); // Remove the # from href
+        setActiveLink(link);
+        showPage(pageId);
+    });
+});
+
+// Handle initial page load
+window.addEventListener('load', () => {
+    // Get the hash from URL or default to 'accueil'
+    const initialPage = window.location.hash ? 
+        window.location.hash.substring(1) : 'accueil';
+    
+    // Find the corresponding nav link
+    const initialLink = document.querySelector(`.nav-links a[href="#${initialPage}"]`);
+    if (initialLink) {
+        setActiveLink(initialLink);
+        showPage(initialPage);
+    } else {
+        // If no matching link, default to home
+        const homeLink = document.querySelector('.nav-links a[href="#accueil"]');
+        setActiveLink(homeLink);
+        showPage('accueil');
+    }
+});
+    </script>
+
+    <style>
+        /* --- PAGE NAVIGATION SYSTEM --- */
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 100px 5% 80px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#accueil {
+    display: block;
+}
+
+/* --- COLLECTION/SERVICES PAGE --- */
+.collection-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-image-container {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    padding: 20px;
+}
+
+.product-card:hover .product-image {
+    filter: blur(5px);
+    transform: scale(1.05);
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-details {
+    text-align: center;
+}
+
+.product-description {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--dark);
+}
+
+.size-selector {
+    margin-bottom: 20px;
+}
+
+.size-selector p {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.size-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.size-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.size-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.product-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.product-btn:hover {
+    background: #a83896;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(168, 56, 150, 0.3);
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    margin: 15px 0 5px;
+    color: var(--dark);
+}
+
+.product-price {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* --- CONTACT PAGE --- */
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 60px;
+    gap: 40px;
+}
+
+.contact-info, .contact-form {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.contact-icon {
+    background: var(--primary);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    box-shadow: 0 5px 15px rgba(192, 76, 170, 0.2);
+}
+
+.contact-icon span {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.contact-item h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 5px;
+    color: var(--dark);
+}
+
+.contact-item p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.contact-hours {
+    text-align: left;
+    margin-top: 40px;
+}
+
+.contact-hours h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.contact-hours p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #a83896;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(168, 56, 150, 0.3);
+}
+    </style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Configuration
+    const boutiqueLocation = [48.108385, -1.677844];
+    const boutiqueAdresse = "adresse a renne";
+    const mapZoom = 16;
+    
+    // Création d'une fonction pour initialiser la carte avec gestion des erreurs
+    function initMap() {
+        try {
+            // Vérifier si l'élément existe
+            const mapElement = document.getElementById('boutique-map');
+            if (!mapElement) {
+                console.error("L'élément 'boutique-map' n'existe pas dans le DOM");
+                return;
+            }
+            
+            // Initialisation de la carte avec une vérification si elle existe déjà
+            if (window.boutiqueMap) {
+                window.boutiqueMap.remove();
+            }
+            
+            const map = L.map('boutique-map', {
+                zoomControl: true,
+                scrollWheelZoom: true
+            }).setView(boutiqueLocation, mapZoom);
+            
+            window.boutiqueMap = map;
+            
+            // Alternative 1: OpenStreetMap (comme votre code initial)
+            const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 19
+            });
+            
+            // Alternative 2: CartoDB (plus fiable, également gratuit)
+            const cartoDBLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            });
+            
+            // Utiliser CartoDB par défaut
+            cartoDBLayer.addTo(map);
+            
+            // Marqueur personnalisé
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color:#c04caa;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 0 10px rgba(0,0,0,0.3)"></div>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
+            
+            // Ajout du marqueur
+            const marker = L.marker(boutiqueLocation, {icon: icon}).addTo(map);
+            
+            // Infobulle
+            marker.bindPopup(`
+                <div style="padding:10px; width:200px;">
+                    <h3 style="margin:0 0 5px 0;color:#c04caa;font-size:16px">GABRIEL.LE</h3>
+                    <p style="margin:0;font-size:14px">${boutiqueAdresse}</p>
+                </div>
+            `).openPopup();
+            
+            // Événement de chargement complet des tuiles
+            map.on('load', function() {
+                console.log("Carte chargée avec succès");
+            });
+            
+            // Gérer les erreurs de chargement de tuiles
+            map.on('tileerror', function(error) {
+                console.error("Erreur de chargement de tuile:", error);
+                // Si OpenStreetMap échoue, essayer CartoDB
+                if (map.hasLayer(osmLayer)) {
+                    map.removeLayer(osmLayer);
+                    cartoDBLayer.addTo(map);
+                }
+            });
+            
+            // Force un recalcul de la taille après chargement
+            setTimeout(() => {
+                map.invalidateSize(true);
+            }, 500);
+            
+            // Recalcul supplémentaire si la carte est dans un onglet ou un élément caché initialement
+            setTimeout(() => {
+                map.invalidateSize(true);
+            }, 1500);
+            
+            return map;
+        } catch (error) {
+            console.error("Erreur lors de l'initialisation de la carte:", error);
+        }
+    }
+    
+    // Initialiser la carte
+    const map = initMap();
+    
+    // Ajouter des gestionnaires pour les événements de redimensionnement
+    window.addEventListener('resize', function() {
+        if (window.boutiqueMap) {
+            window.boutiqueMap.invalidateSize(true);
+        }
+    });
+    
+    // Si la carte est dans un onglet, s'assurer qu'elle se recalcule lorsque l'onglet devient visible
+    document.addEventListener('click', function(e) {
+        if (e.target && (e.target.getAttribute('data-toggle') === 'tab' || e.target.closest('[data-toggle="tab"]'))) {
+            setTimeout(() => {
+                if (window.boutiqueMap) {
+                    window.boutiqueMap.invalidateSize(true);
+                }
+            }, 100);
+        }
+    });
+});
+</script>
+
+<style>
+    .leaflet-popup-content-wrapper{
+        width: 200px;
+    }
+    .contact-map {
+        width: 100%;
+        margin: 20px 0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .map-container {
+        width: 100%;
+        height: 400px;
+        position: relative;
+    }
+    
+    #boutique-map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    @media (max-width: 768px) {
+        .map-container {
+            height: 300px;
+        }
+    }
+</style>
+</body>
+</html>
