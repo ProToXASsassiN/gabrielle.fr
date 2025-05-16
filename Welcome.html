@@ -40,6 +40,7 @@
 /* D'abord, réinitialisons complètement le style de la navigation */
 nav {
     position: fixed;
+    height: 50px;
     width: 100%;
     background-color: rgba(254, 248, 255, 0.95);
     z-index: 1000;
@@ -48,6 +49,21 @@ nav {
     transition: var(--transition);
     padding: 0;
     display: block; /* Important: changement de flex à block */
+}
+        nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    padding-top: 0;
+    z-index: 1000;
+}
+
+/* Si besoin, ajuster également le body */
+body {
+    margin-top: 0;
+    padding-top: 0;
 }
 
 /* Container du logo pour assurer un centrage parfait */
@@ -3160,7 +3176,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
     /* Image de fond pour tout le site avec filtre de couleur */
     body {
-        background-image: url('/api/placeholder/1920/1080');
+        background-image: 774809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg;
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
