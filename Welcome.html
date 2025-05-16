@@ -125,11 +125,13 @@ nav {
 }
 
 .nav-links a[href="#services"],
+.nav-links a[href="#lingerie-engagee"],
 .nav-links a[href="#contact"] {
     color: var(--primary);
 }
 
 .nav-links a[href="#services"]:after,
+.nav-links a[href="#lingerie-engagee"]:after,
 .nav-links a[href="#contact"]:after {
     background-color: var(--primary);
 }
@@ -712,29 +714,1313 @@ nav {
     
     <!-- Navigation -->
     <!-- Navigation restructurée -->
+<!-- Navigation restructurée avec menu déroulant -->
 <nav id="navbar">
     <div class="logo-container">
         <a href="#accueil" class="logo">
             <img src="image-removebg-preview.png" alt="Logo">
         </a>
     </div>
+</div>
     <div class="nav-links-container">
         <div class="nav-links">
             <a href="#accueil" class="active">Accueil</a>
-            <a href="#services">Collection</a>
+            
+            <!-- Menu Collections avec sous-menu -->
+            <div class="dropdown">
+                <a href="#services" class="dropdown-toggle">Collection</a>
+                <div class="dropdown-menu">
+                    <!-- Section Hommes - Juste un toggle, pas de lien de navigation -->
+                    <div class="dropdown-section">
+                        <div class="dropdown-category">
+                            <span class="dropdown-category-toggle category-name gabriel-style">Hommes</span>
+                            <div class="dropdown-subcategory">
+                                <a href="#calcons">Caleçons</a>
+                                <a href="#maillots-homme">Maillots de bain</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Femmes - Juste un toggle, pas de lien de navigation -->
+                    <div class="dropdown-section">
+                        <div class="dropdown-category">
+                            <!-- <span class="dropdown-category-toggle">Femmes</span> -->
+                            <span class="dropdown-category-toggle category-name gabriel-style">Femmes</span>
+
+                            <div class="dropdown-subcategory">
+                                <a href="#soutiens-gorge">Soutiens-gorge</a>
+                                <a href="#culotte">Culottes</a>
+                                <a href="#body">Body</a>
+                                <a href="#maillots-femme">Maillots de bain</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#lingerie-engagee">Lingerie engagée</a>
             <a href="#contact">Contact</a>
         </div>
     </div>
 </nav>
+<script>
+    // JavaScript pour appliquer la typographie GABRIEL.LE de manière dynamique
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Appliquer le style au logo
+    const logoElements = document.querySelectorAll('.logo');
+    logoElements.forEach(logo => {
+        // Ne remplacer que si c'est le logo texte (pas une image)
+        if (!logo.querySelector('img')) {
+            logo.innerHTML = '<span class="gabriel-typography">GABRIEL<span class="dot">.</span>LE</span>';
+        }
+    });
+    
+    // 2. Appliquer le style aux titres de section
+    const sectionTitles = document.querySelectorAll('.section-title');
+    sectionTitles.forEach(title => {
+        title.classList.add('gabriel-style');
+    });
+    
+    // 3. Appliquer le style aux prix
+    const productPrices = document.querySelectorAll('.product-price');
+    productPrices.forEach(price => {
+        price.classList.add('gabriel-style');
+    });
+    
+    // 4. Appliquer le style aux boutons spécifiques
+    const engagementButton = document.querySelector('.engagement-btn');
+    if (engagementButton) {
+        engagementButton.classList.add('btn-gabriel');
+    }
+    
+    const testimonialButtons = document.querySelectorAll('.testimonial-btn');
+    testimonialButtons.forEach(button => {
+        button.classList.add('btn-gabriel');
+    });
+    
+    // 5. Appliquer le style aux toggles de catégories
+    const categoryToggles = document.querySelectorAll('.dropdown-category-toggle');
+    categoryToggles.forEach(toggle => {
+        toggle.classList.add('category-name', 'gabriel-style');
+    });
+});
+</script>
+<style>
+/* Style pour le menu déroulant de navigation */
+
+/* Container de dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style du lien principal qui toggle le dropdown */
+.dropdown-toggle {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    transition: var(--transition);
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.dropdown-toggle:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.dropdown-toggle:hover:after {
+    width: 100%;
+}
+
+/* Menu dropdown principal */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: 200px;
+    background-color: rgba(254, 248, 255, 0.98);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 15px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1100;
+    backdrop-filter: blur(10px);
+    margin-top: 5px;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Sections du menu dropdown */
+.dropdown-section {
+    padding: 5px 0;
+}
+
+/* Style pour les titres de catégorie */
+.dropdown-category {
+    position: relative;
+}
+
+.dropdown-category-toggle {
+    display: block;
+    padding: 8px 20px;
+    color: var(--dark);
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    text-align: left;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.dropdown-category-toggle:hover {
+    background-color: rgba(192, 76, 170, 0.05);
+    color: var(--primary);
+    border-left: 3px solid var(--primary);
+}
+
+/* Sous-catégories */
+.dropdown-subcategory {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.dropdown-category.active .dropdown-subcategory {
+    max-height: 300px; /* Valeur suffisamment grande pour contenir tous les éléments */
+}
+
+.dropdown-subcategory a {
+    display: block;
+    padding: 8px 20px 8px 30px;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.dropdown-subcategory a:hover {
+    background-color: rgba(192, 76, 170, 0.05);
+    color: var(--primary);
+}
+
+/* Style pour la navigation mobile */
+@media screen and (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        width: 100%;
+        box-shadow: none;
+        margin-top: 0;
+        background-color: rgba(254, 248, 255, 0.95);
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        max-height: 500px;
+        padding: 10px 0;
+    }
+    
+    .dropdown-toggle {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dropdown-category-toggle {
+        text-align: center;
+    }
+    
+    .dropdown-subcategory a {
+        text-align: center;
+        padding-left: 0;
+    }
+    
+    /* Navigation en colonne pour mobile */
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .nav-links > a,
+    .nav-links > .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Styles pour les sections de produits par catégorie */
+.product-section {
+    display: none;
+    min-height: 100vh;
+    padding: 100px 5% 80px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.product-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-collection-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Styles spécifiques pour chaque catégorie */
+#calcons .section-title span,
+#maillots-homme .section-title span {
+    color: var(--secondary);
+}
+
+#calcons .product-card:hover .engagement-icon,
+#maillots-homme .product-card:hover .engagement-icon {
+    background: var(--secondary);
+}
+
+/* Adaptations pour l'affichage mobile des produits */
+@media screen and (max-width: 768px) {
+    .product-section {
+        padding-top: 80px;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* Animation des size buttons */
+.size-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.size-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(192, 76, 170, 0.2);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.size-btn:hover::before {
+    left: 0;
+}
+
+.size-btn.selected {
+    background: var(--primary);
+    color: white;
+}
+
+/* Transitions fluides pour les sections de produit */
+.product-section .product-card {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+}
+
+.product-section.active .product-card {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.product-section .product-card:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.product-section .product-card:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.product-section .product-card:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+/* Amélioration des hovers pour le menu déroulant */
+.dropdown-subcategory a {
+    position: relative;
+    transition: padding 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-subcategory a:hover {
+    padding-left: 35px;
+}
+
+.dropdown-subcategory a::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.dropdown-subcategory a:hover::before {
+    transform: translateY(-50%) scale(1);
+}
+
+/* Adaptation du menu déroulant pour mobile */
+@media screen and (max-width: 768px) {
+    .dropdown-menu {
+        border-radius: 0;
+        margin-top: 10px;
+    }
+    
+    .dropdown-category-toggle {
+        text-align: center;
+        padding: 12px 20px;
+    }
+    
+    .dropdown-subcategory a {
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    .dropdown-subcategory a:hover {
+        padding-left: 0;
+    }
+    
+    .dropdown-subcategory a::before {
+        display: none;
+    }
+}
+
+/* Effet de transition entre les pages */
+.page, .product-section {
+    animation: fadeTransition 0.5s ease-out;
+}
+
+@keyframes fadeTransition {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles pour la section Lingerie Engagée */
+.lingerie-engagee-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+.engagement-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.engagement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(192, 76, 170, 0.15);
+}
+
+.engagement-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 20px rgba(192, 76, 170, 0.2);
+    transition: var(--transition);
+}
+
+.engagement-card:hover .engagement-icon {
+    transform: scale(1.1);
+}
+
+.engagement-icon span {
+    font-size: 2rem;
+}
+
+.engagement-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.engagement-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.certification-section {
+    margin: 80px 0 60px;
+}
+
+.certification-section h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark);
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.certification-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.certification-logo {
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.certification-logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(192, 76, 170, 0.1);
+}
+
+.certification-logo span {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.engagement-action {
+    margin: 60px 0 40px;
+}
+
+.engagement-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    box-shadow: 0 8px 20px rgba(192, 76, 170, 0.2);
+}
+
+.engagement-btn:hover {
+    background: #a83896;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(168, 56, 150, 0.3);
+}
+
+/* Adaptations pour mobile */
+@media screen and (max-width: 768px) {
+    .engagement-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .certification-logos {
+        gap: 20px;
+    }
+    
+    .certification-logo {
+        width: 90px;
+        height: 90px;
+    }
+}
+</style>
+<script>
+// JavaScript pour le menu déroulant et les interactions produits
+document.addEventListener('DOMContentLoaded', function() {
+    // Gérer les toggles de catégories (Hommes/Femmes) - ils servent uniquement à ouvrir les sous-menus
+    const categoryToggles = document.querySelectorAll('.dropdown-category-toggle');
+    
+    categoryToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            // Toujours empêcher la navigation par défaut pour Hommes/Femmes
+            e.preventDefault();
+            
+            // Trouver l'élément parent (dropdown-category)
+            const category = this.closest('.dropdown-category');
+            
+            // Toggle la classe active
+            if (category.classList.contains('active')) {
+                category.classList.remove('active');
+            } else {
+                // Fermer les autres catégories actives d'abord
+                document.querySelectorAll('.dropdown-category.active').forEach(activeCategory => {
+                    if (activeCategory !== category) {
+                        activeCategory.classList.remove('active');
+                    }
+                });
+                
+                // Activer cette catégorie
+                category.classList.add('active');
+            }
+        });
+    });
+    
+    // Sur mobile, gérer le toggle du menu principal
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdown = document.querySelector('.dropdown');
+    
+    if (window.innerWidth <= 768) {
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdown.classList.toggle('active');
+        });
+    }
+    
+    // Fermer les menus si on clique à l'extérieur
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-category.active').forEach(category => {
+                category.classList.remove('active');
+            });
+            
+            if (window.innerWidth <= 768) {
+                dropdown.classList.remove('active');
+            }
+        }
+    });
+    
+    // Gérer les liens de sous-catégorie
+    const subcategoryLinks = document.querySelectorAll('.dropdown-subcategory a');
+    
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            
+            // Fermer les menus déroulants
+            document.querySelectorAll('.dropdown-category.active').forEach(category => {
+                category.classList.remove('active');
+            });
+            
+            if (window.innerWidth <= 768) {
+                dropdown.classList.remove('active');
+            }
+            
+            // Mettre à jour le lien actif dans la navigation
+            document.querySelectorAll('.nav-links a').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            
+            // On active le lien Collections
+            dropdownToggle.classList.add('active');
+            
+            // Afficher la section de produits correspondante
+            showProductSection(targetId);
+        });
+    });
+    
+    // Fonction pour afficher une section de produits spécifique
+    function showProductSection(sectionId) {
+        // Cacher toutes les pages d'abord
+        const heroSection = document.querySelector('.hero');
+        const pages = document.querySelectorAll('.page');
+        const productSections = document.querySelectorAll('.product-section');
+        
+        // Cacher les sections d'accueil
+        heroSection.style.display = 'none';
+        document.querySelector('.values').style.display = 'none';
+        document.querySelector('.collection').style.display = 'none';
+        document.querySelector('.testimonial').style.display = 'none';
+        
+        // Cacher toutes les pages
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Cacher toutes les sections de produits d'abord
+        productSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Afficher la section de produits spécifique
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            
+            // Remonter en haut de la page
+            window.scrollTo(0, 0);
+            
+            // Animer les éléments
+            const animations = targetSection.querySelectorAll('.scroll-reveal');
+            animations.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, index * 100);
+            });
+        }
+    }
+    
+    // Ajout de code pour gérer les nouveaux liens de navigation
+    const lingerieEngageeLink = document.querySelector('a[href="#lingerie-engagee"]');
+    
+    if (lingerieEngageeLink) {
+        lingerieEngageeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Mettre à jour le lien actif
+            document.querySelectorAll('.nav-links a').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Ici vous pourriez ajouter du code pour charger la page correspondante
+            showPage('lingerie-engagee');
+        });
+    }
+    
+    // Fonction pour afficher la page correspondante
+    function showPage(pageId) {
+        // Gestion similaire à votre code existant pour les autres pages
+        const heroSection = document.querySelector('.hero');
+        const pages = document.querySelectorAll('.page');
+        
+        // Cacher les sections d'accueil si nécessaire
+        if (pageId !== 'accueil') {
+            heroSection.style.display = 'none';
+            document.querySelector('.values').style.display = 'none';
+            document.querySelector('.collection').style.display = 'none';
+            document.querySelector('.testimonial').style.display = 'none';
+        } else {
+            heroSection.style.display = 'flex';
+            document.querySelector('.values').style.display = 'flex';
+            document.querySelector('.collection').style.display = 'block';
+            document.querySelector('.testimonial').style.display = 'block';
+        }
+        
+        // Afficher la page correspondante
+        pages.forEach(page => {
+            if (page.id === pageId) {
+                page.classList.add('active');
+                
+                // Remonter en haut de la page
+                window.scrollTo(0, 0);
+                
+                // Animer les éléments
+                const animations = page.querySelectorAll('.scroll-reveal');
+                animations.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 100);
+                });
+            } else {
+                page.classList.remove('active');
+            }
+        });
+    }
+    
+    // Adapter le menu en fonction de la taille de l'écran
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // Version desktop
+            dropdown.classList.remove('active');
+            
+            // Enlever les écouteurs d'événements mobile
+            dropdownToggle.removeEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        } else {
+            // Version mobile - ajouter les écouteurs d'événements au besoin
+        }
+    });
+    
+    // Fonctions pour l'interactivité des produits
+    
+    // Activer les boutons de sélection de taille
+    setupSizeButtons();
+    
+    // Améliorer l'animation des cartes de produits
+    setupProductCardAnimations();
+    
+    // Ajouter le comportement du menu collections
+    setupCollectionButtonBehavior();
+});
+
+// Fonction pour les boutons de taille
+function setupSizeButtons() {
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Récupérer tous les boutons dans le même groupe
+            const sizeGroup = this.closest('.size-options');
+            const buttonsInGroup = sizeGroup.querySelectorAll('.size-btn');
+            
+            // Enlever la classe selected de tous les boutons du groupe
+            buttonsInGroup.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Ajouter la classe selected au bouton cliqué
+            this.classList.add('selected');
+            
+            // Effet visuel de sélection
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Optionnel : afficher un message de confirmation de taille sélectionnée
+            const productCard = this.closest('.product-card');
+            if (productCard) {
+                const productName = productCard.querySelector('.product-name').textContent;
+                const selectedSize = this.textContent;
+                console.log(`Taille ${selectedSize} sélectionnée pour ${productName}`);
+            }
+        });
+    });
+}
+
+// Fonction pour améliorer l'animation des cartes de produits
+function setupProductCardAnimations() {
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+        // Animation au survol
+        card.addEventListener('mouseenter', function() {
+            const image = this.querySelector('.product-image');
+            if (image) {
+                image.style.transform = 'scale(1.05)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const image = this.querySelector('.product-image');
+            if (image) {
+                image.style.transform = 'scale(1)';
+            }
+        });
+        
+        // Animation au clic pour mobile
+        card.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                this.classList.toggle('show-overlay');
+            }
+        });
+    });
+    
+    // Observer pour animation au scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Observer tous les éléments avec la classe scroll-reveal
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Configuration du comportement du lien "Collection"
+function setupCollectionButtonBehavior() {
+    const collectionToggle = document.querySelector('.dropdown-toggle');
+    
+    if (collectionToggle) {
+        collectionToggle.addEventListener('click', function(e) {
+            // Permettre la navigation vers la page collection principale si on clique sur le lien
+            // (pas un simple toggle du dropdown)
+            
+            // Pour mobile - gérer le toggle de la dropdown
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                this.closest('.dropdown').classList.toggle('active');
+            }
+        });
+    }
+    
+    // S'assurer que le dropdown se ferme quand on clique ailleurs
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown') && window.innerWidth <= 768) {
+            const dropdown = document.querySelector('.dropdown');
+            if (dropdown) {
+                dropdown.classList.remove('active');
+            }
+        }
+    });
+}
+</script>
+
+<!-- Section Lingerie Engagée -->
+<section id="lingerie-engagee" class="page">
+    <div class="lingerie-engagee-container">
+        <h2 class="section-title gabriel-style">Lingerie <span>Engagée</span></h2>
+        <p class="scroll-reveal">Découvrez notre engagement pour une mode responsable et éthique. Chaque pièce raconte une histoire de développement durable et de respect.</p>
+        
+        <div class="engagement-grid">
+            <!-- Engagement 1 -->
+            <div class="engagement-card scroll-reveal">
+                <div class="engagement-icon">
+                    <span>🌿</span>
+                </div>
+                <h3>Matières Écologiques</h3>
+                <p>Nos tissus sont issus de l'agriculture biologique ou de fibres recyclées, permettant de réduire considérablement notre empreinte environnementale.</p>
+            </div>
+            
+            <!-- Engagement 2 -->
+            <div class="engagement-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="engagement-icon">
+                    <span>👐</span>
+                </div>
+                <h3>Fabrication Éthique</h3>
+                <p>Chaque pièce est confectionnée dans des ateliers locaux respectant des conditions de travail justes et équitables pour tous les artisans.</p>
+            </div>
+            
+            <!-- Engagement 3 -->
+            <div class="engagement-card scroll-reveal" style="transition-delay: 0.2s;">
+                <div class="engagement-icon">
+                    <span>♻️</span>
+                </div>
+                <h3>Zéro Déchet</h3>
+                <p>Notre processus de production est optimisé pour minimiser les chutes de tissu, et nos emballages sont entièrement biodégradables ou recyclables.</p>
+            </div>
+            
+            <!-- Engagement 4 -->
+            <div class="engagement-card scroll-reveal" style="transition-delay: 0.3s;">
+                <div class="engagement-icon">
+                    <span>🤍</span>
+                </div>
+                <h3>Inclusivité</h3>
+                <p>Nous célébrons la diversité des corps en proposant une gamme adaptée à toutes les morphologies, car la lingerie doit être un plaisir accessible à tous.</p>
+            </div>
+        </div>
+        
+<!--         <div class="certification-section scroll-reveal">
+            <h3>Nos Certifications</h3>
+            <div class="certification-logos">
+                <div class="certification-logo">
+                    <span>GOTS</span>
+                </div>
+                <div class="certification-logo">
+                    <span>OEKO-TEX</span>
+                </div>
+                <div class="certification-logo">
+                    <span>FAIR TRADE</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="engagement-action scroll-reveal">
+            <a href="#contact" class="engagement-btn">Parlez-nous de vos valeurs</a>
+        </div> -->
+    </div>
+</section>
+
+<!-- Sections de produits pour Hommes -->
+<section id="calcons" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Collection <span>Caleçons</span></h2>
+        <p class="scroll-reveal">Notre sélection de caleçons alliant confort et élégance, conçus pour le quotidien comme pour les occasions spéciales.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Caleçon Élégant" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Caleçon en coton bio et modal, coupe ajustée etconfortable avec élastique doux.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Caleçon Élégant</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Caleçon Confort" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Caleçon en bambou et coton, tissu respirant et naturellement antibactérien. Coupe ample et agréable.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Caleçon Confort</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="maillots-homme" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Maillots de Bain <span>Hommes</span></h2>
+        <p class="scroll-reveal">Des maillots de bain stylés et confortables, conçus pour résister au chlore et au sel marin.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Short de Bain" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Short de bain en polyester recyclé, séchage rapide avec motifs géométriques élégants.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Short de Bain Géométrique</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Slip de Bain" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Slip de bain athlétique en tissu technique durable, idéal pour la natation sportive.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                    <button class="size-btn">XL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Slip de Bain Performance</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sections de produits pour Femmes -->
+<section id="soutiens-gorge" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Collection <span>Soutiens-gorge</span></h2>
+        <p class="scroll-reveal">Notre gamme de soutiens-gorge alliant confort, maintien et élégance, pour sublimer chaque silhouette.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Soutien-gorge Balconnet" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Soutien-gorge balconnet en dentelle française et coton biologique, armatures confortables.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">85B</button>
+                                    <button class="size-btn">90B</button>
+                                    <button class="size-btn">90C</button>
+                                    <button class="size-btn">95C</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Balconnet Élégance</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Bralette" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Bralette en dentelle et modal, sans armatures pour un confort optimal et une féminité naturelle.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Bralette Nature</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="culotte" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Collection <span>Culottes</span></h2>
+        <p class="scroll-reveal">Des culottes élégantes et confortables pour tous les jours, créées dans des matières douces et respirantes.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Culotte Taille Haute" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Culotte taille haute en coton bio, coupe gainante et confortable pour sublimer votre silhouette.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Culotte Taille Haute Élégance</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Tanga" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Tanga en dentelle et coton, coupe moderne et féminine pour un confort quotidien.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Tanga Dentelle</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="body" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Collection <span>Body</span></h2>
+        <p class="scroll-reveal">Des body raffinés qui allient confort et élégance, parfaits sous vos tenues de tous les jours ou pour des occasions spéciales.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Body en Dentelle" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Body en dentelle française et microfibre, ajustable et confortable pour toutes les morphologies.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Body Dentelle Romantique</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Body Sculptant" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Body sculptant en microfibre et élasthanne, effet gainant et maintien parfait pour une silhouette affinée.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Body Sculptant Satiné</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="maillots-femme" class="product-section page">
+    <div class="product-collection-container">
+        <h2 class="section-title scroll-reveal">Maillots de Bain <span>Femmes</span></h2>
+        <p class="scroll-reveal">Des maillots de bain élégants et confortables, conçus pour sublimer toutes les morphologies.</p>
+        
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card scroll-reveal">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Maillot Une Pièce" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Maillot une pièce en polyamide recyclé, décolleté élégant et coupe gainante pour un effet sculptant.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Maillot Une Pièce Élégance</h3>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+                <div class="product-image-container">
+                    <img src="/api/placeholder/500/600" alt="Bikini" class="product-image">
+                    <div class="product-overlay">
+                        <div class="product-details">
+                            <p class="product-description">Bikini en polyester recyclé, top à armatures et culotte échancrée pour un look moderne et raffiné.</p>
+                            <div class="size-selector">
+                                <p>Sélectionnez votre taille</p>
+                                <div class="size-options">
+                                    <button class="size-btn">XS</button>
+                                    <button class="size-btn">S</button>
+                                    <button class="size-btn">M</button>
+                                    <button class="size-btn">L</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="product-name">Bikini Écochic</h3>
+            </div>
+        </div>
+    </div>
+</section>
     
     <!-- Hero Section -->
-    <section class="hero" id="accueil">
-        <div class="hero-content">
-            <h1>titre <span>lingerie</span> Luxueuse</h1>
-            <p>Découvrez des pièces uniques où confort rime avec élégance.</p>
-            <a href="#services" class="hero-btn">Découvrir la Collection</a>
+    <!-- Hero Section avec trois rectangles horizontaux luxueux -->
+<section class="hero" id="accueil">
+    <div class="hero-content">
+        <div class="hero-rectangles-container">
+            <div class="hero-rectangles">
+                <a href="#contact" class="hero-rectangle rectangle-secondary">
+                    <div class="rectangle-content">
+                        <div class="rectangle-icon">📅</div>
+                        <div class="rectangle-text">
+                            <h3>Prendre<br>RDV</h3>
+                        </div>
+                    </div>
+                    <div class="rectangle-shine"></div>
+                </a>
+                <a href="#guides" class="hero-rectangle rectangle-primary">
+                    <div class="rectangle-content">
+                        <div class="rectangle-icon">📏</div>
+                        <div class="rectangle-text">
+                            <h3>Nos<br>Conseils<br>Guide des<br>Tailles</h3>
+                        </div>
+                    </div>
+                    <div class="rectangle-shine"></div>
+                </a>
+                <a href="#concept" class="hero-rectangle rectangle-primary">
+                    <div class="rectangle-content">
+                        <div class="rectangle-icon">✨</div>
+                        <div class="rectangle-text">
+                            <h3>Notre<br>Concept<br>À Propos de<br>Nous</h3>
+                        </div>
+                    </div>
+                    <div class="rectangle-shine"></div>
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
     
     <!-- Brand Values -->
     <section class="values">
@@ -796,7 +2082,7 @@ nav {
             <p class="testimonial-source">— Marie Claire, Éditorial Elle</p>
             
             <div class="testimonial-buttons">
-                <a href="#contact" class="testimonial-btn btn-secondary">Prendre Rendez-vous</a>
+                <a href="#contact" class="btn-gabrielr">Prendre Rendez-vous</a>
                 <a href="#" class="testimonial-btn btn-primary">Nos Conseils</a>
                 <a href="#" class="testimonial-btn btn-primary">Notre Concept</a>
             </div>
@@ -806,7 +2092,7 @@ nav {
     <!-- Section Collection (page séparée) -->
 <section id="services" class="page">
     <div class="collection-container">
-        <h2 class="section-title scroll-reveal">Notre <span>Collection</span></h2>
+        <h2 class="section-title gabriel-style">Notre <span>Collection</span></h2>
         <p class="scroll-reveal">Explorez notre gamme exclusive de lingerie de luxe, conçue pour sublimer chaque silhouette avec élégance et raffinement.</p>
         
         <div class="product-grid">
@@ -1236,6 +2522,108 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 
     <style>
+
+        /* Style pour reproduire la typographie du logo GABRIEL.LE */
+
+/* Classe principale pour la typographie du logo */
+.gabriel-typography {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: 0.15em; /* Espacement des lettres */
+    text-transform: uppercase; /* Majuscules */
+    color: var(--dark);
+}
+
+/* Effet du point distinctif entre GABRIEL et LE */
+.gabriel-typography .dot {
+    color: var(--primary);
+    font-size: 1.2em; /* Point légèrement plus gros */
+    position: relative;
+    top: -0.05em; /* Ajustement vertical du point */
+}
+
+/* Variante pour les titres importants */
+.section-title.gabriel-style {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.section-title.gabriel-style span {
+    color: var(--primary);
+}
+
+/* Application pour le pied de page */
+.footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Style pour les boutons inspirés par la typographie */
+.btn-gabriel {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 12px 30px;
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.btn-gabriel:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-gabrielr {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 12px 30px;
+    border: 1px solid #5d8a4f;
+    background: transparent;
+    color: #5d8a4f;
+    transition: var(--transition);
+}
+
+.btn-gabrielr:hover {
+    background: #5d8a4f;
+    color: white;
+}
+
+/* Style pour les prix des produits */
+.product-price.gabriel-style {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.05em;
+    /* color: var(--primary); */
+    font-weight: 500;
+}
+
+/* Style pour les noms de catégories */
+.category-name.gabriel-style {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.category-name.gabriel-style::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--primary);
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
         /* --- PAGE NAVIGATION SYSTEM --- */
 .page {
     display: none;
@@ -1769,5 +3157,360 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 </style>
+<style>
+    /* Image de fond pour tout le site avec filtre de couleur */
+    body {
+        background-image: url('/api/placeholder/1920/1080');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(192, 76, 170, 0.85) 0%, rgba(119, 166, 102, 0.85) 100%);
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    /* Adaptation du style des sections pour la nouvelle image de fond */
+    .page, section:not(.hero) {
+        background-color: rgba(254, 248, 255, 0.92);
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 1400px;
+        width: 95%;
+    }
+    
+    /* Style pour la nouvelle section Hero avec rectangles horizontaux luxueux */
+    .hero {
+        height: 100vh;
+        background: transparent !important; /* Retire le background précédent */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+    
+    /* Retirez le filtre précédent */
+    .hero::before {
+        display: none;
+    }
+    
+    /* Container principal pour assurer le centrage parfait */
+    .hero-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+    }
+    
+    .hero-rectangles-container {
+        width: 100%;
+        max-width: 1400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Style des rectangles en disposition horizontale */
+    .hero-rectangles {
+        display: flex;
+        flex-direction: row; /* Disposition horizontale */
+        justify-content: center;
+        align-items: stretch;
+        gap: 40px; /* Espacement entre les rectangles */
+        width: 100%;
+    }
+    
+    .hero-rectangle {
+        flex: 1;
+        width: calc(33.33% - 80px/3); /* Distribue l'espace équitablement en tenant compte des gaps */
+        min-width: 250px;
+        height: 260px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        border-radius: 4px; /* Coins moins arrondis pour plus de sobriété */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée et complexe */
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                    box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: rectangleAppear 0.8s forwards;
+    }
+    
+    /* Animation d'apparition pour chaque rectangle */
+    @keyframes rectangleAppear {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .hero-rectangle:nth-child(1) {
+        animation-delay: 0.3s;
+    }
+    
+    .hero-rectangle:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+    
+    .hero-rectangle:nth-child(3) {
+        animation-delay: 0.5s;
+    }
+    
+    /* Effet de brillance au survol (similaire aux boutons du bas de page) */
+    .rectangle-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg, 
+            rgba(255, 255, 255, 0) 0%, 
+            rgba(255, 255, 255, 0.1) 50%, 
+            rgba(255, 255, 255, 0) 100%
+        );
+        transition: left 1s cubic-bezier(0.19, 1, 0.22, 1);
+        pointer-events: none;
+    }
+    
+    .hero-rectangle:hover .rectangle-shine {
+        left: 100%;
+    }
+    
+    .hero-rectangle:hover {
+        transform: translateY(-12px); /* Mouvement plus prononcé au survol */
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 15px 30px rgba(0, 0, 0, 0.2); /* Ombre plus grande au survol */
+    }
+    
+    .rectangle-content {
+        position: relative;
+        z-index: 1;
+        padding: 25px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .rectangle-icon {
+        font-size: 3.5rem; /* Icône plus grande pour plus d'impact */
+        margin-bottom: 10px;
+        transition: transform 0.4s ease;
+    }
+    
+    .hero-rectangle:hover .rectangle-icon {
+        transform: scale(1.15); /* Légère animation de l'icône au survol */
+    }
+    
+    .rectangle-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.4s ease;
+    }
+    
+    .hero-rectangle:hover .rectangle-text {
+        transform: translateY(5px); /* Léger mouvement du texte au survol */
+    }
+    
+    .hero-rectangle h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 400; /* Plus léger pour plus d'élégance */
+        letter-spacing: 1px; /* Espacement des lettres pour un look sophistiqué */
+        margin: 0;
+        line-height: 1.5;
+        text-align: center;
+        text-transform: uppercase; /* Majuscules pour un aspect luxueux */
+    }
+    
+    /* Couleurs spécifiques pour chaque rectangle */
+    .rectangle-primary {
+        background: linear-gradient(145deg, rgba(192, 76, 170, 0.85), rgba(192, 76, 170, 0.7));
+    }
+    
+    .rectangle-secondary {
+        background: linear-gradient(145deg, rgba(119, 166, 102, 0.85), rgba(119, 166, 102, 0.7));
+    }
+    
+    /* Adaptation pour tablettes */
+    @media screen and (max-width: 1200px) {
+        .hero-rectangles {
+            gap: 30px;
+        }
+        
+        .hero-rectangle {
+            width: calc(33.33% - 60px/3); /* Ajuster en fonction du nouveau gap */
+        }
+    }
+    
+    /* Adaptation pour petites tablettes */
+    @media screen and (max-width: 992px) {
+        .hero-rectangles {
+            flex-direction: column; /* Passer en vertical sur mobile/tablette */
+            width: 100%;
+            max-width: 450px;
+            gap: 25px;
+        }
+        
+        .hero-rectangle {
+            width: 100%;
+            height: 170px;
+        }
+        
+        .rectangle-content {
+            flex-direction: row;
+            text-align: left;
+            justify-content: flex-start;
+            padding: 20px 30px;
+            gap: 30px;
+        }
+        
+        .rectangle-text {
+            align-items: flex-start;
+        }
+        
+        .rectangle-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0;
+        }
+        
+        .hero-rectangle h3 {
+            text-align: left;
+            font-size: 1.3rem;
+        }
+    }
+    
+    /* Ajustements spécifiques pour les petits mobiles */
+    @media screen and (max-width: 480px) {
+        .hero-rectangles {
+            max-width: 380px;
+            gap: 20px;
+        }
+        
+        .hero-rectangle {
+            height: 140px;
+        }
+        
+        .rectangle-content {
+            padding: 15px 25px;
+            gap: 20px;
+        }
+        
+        .rectangle-icon {
+            font-size: 2.4rem;
+        }
+        
+        .hero-rectangle h3 {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+<!-- JavaScript pour les nouvelles interactions des rectangles -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gestion des clics sur les rectangles
+        const heroRectangles = document.querySelectorAll('.hero-rectangle');
+        
+        heroRectangles.forEach(rectangle => {
+            rectangle.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Effet visuel de clic
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // Récupérer la cible
+                const targetId = this.getAttribute('href').substring(1);
+                
+                // Si la page cible existe déjà
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    // Trouver le lien de navigation correspondant
+                    const navLink = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+                    if (navLink) {
+                        navLink.click();
+                    } else {
+                        // Afficher directement la page si pas de lien nav
+                        showPage(targetId);
+                    }
+                } else {
+                    // Comportement par défaut si la page n'existe pas encore
+                    console.log(`La page #${targetId} n'existe pas encore`);
+                    // Rediriger vers la page la plus proche
+                    if (targetId === 'guides') {
+                        // Rediriger vers services pour les guides
+                        const servicesLink = document.querySelector('.nav-links a[href="#services"]');
+                        if (servicesLink) servicesLink.click();
+                    } else if (targetId === 'concept') {
+                        // Rediriger vers lingerie-engagee pour le concept
+                        const conceptLink = document.querySelector('.nav-links a[href="#lingerie-engagee"]');
+                        if (conceptLink) conceptLink.click();
+                    }
+                }
+            });
+            
+            // Ajouter un effet sonore de hover (optionnel)
+            rectangle.addEventListener('mouseenter', function() {
+                // Si vous souhaitez ajouter un son subtil au survol, décommentez ces lignes
+                // const hoverSound = new Audio('path/to/subtle-hover-sound.mp3');
+                // hoverSound.volume = 0.2;
+                // hoverSound.play();
+            });
+        });
+        
+        // Animation d'apparition améliorée pour les rectangles
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Réinitialiser l'animation si besoin
+                    entry.target.style.animation = 'none';
+                    void entry.target.offsetWidth; // Force reflow
+                    entry.target.style.animation = '';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        // Observer les rectangles
+        heroRectangles.forEach(rectangle => {
+            observer.observe(rectangle);
+        });
+    });
+</script>
+<div class="footer-brand">
+    <span class="gabriel-typography">GABRIEL<span class="dot">.</span>LE</span>
+</div>
 </body>
 </html>
