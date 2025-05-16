@@ -9,14 +9,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Lingerie de Luxe - Élégance Intemporelle</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
         
         :root {
-            --primary: #c04caa;
-            --secondary: #77a666;
-            --light: #fef8ff;
-            --dark: #333333;
+            /* Palette de couleurs adoucie */
+            --primary: #c04caa;         /* Violet plus doux */
+            --primary-light: #d9b8d0;    /* Violet clair */
+            --primary-dark: #9d4a8a;     /* Violet foncé */
+            --secondary: #77a666;        /* Vert plus sobre */
+            --secondary-light: #c2d1bb;  /* Vert clair */
+            --secondary-dark: #688659;   /* Vert foncé */
+            --light: #faf7f9;            /* Blanc cassé */
+            --dark: #2d2d2d;             /* Gris foncé */
+            --text: #4a4a4a;             /* Gris pour texte */
+            --text-light: #757575;       /* Gris clair pour texte secondaire */
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --border-radius: 6px;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
         
         * {
@@ -27,252 +42,265 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            color: var(--dark);
+            color: var(--text);
             overflow-x: hidden;
             background-color: var(--light);
+            line-height: 1.6;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        button {
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
         }
         
         /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            height: 90px; /* Réduit de 100px à 90px */
+            width: 100%;
+            background-color: rgba(250, 247, 249, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            padding: 0;
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin-top: 0;
+        }
         
+        /* Container du logo pour assurer un centrage parfait */
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0; /* Réduit de 10px à 5px */
+        }
         
-       /* --- SOLUTION COMPLÈTE POUR LA NAVIGATION --- */
-
-/* D'abord, réinitialisons complètement le style de la navigation */
-nav {
-    position: fixed;
-    height: 157px;
-    width: 100%;
-    background-color: rgba(254, 248, 255, 0.95);
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: var(--transition);
-    padding: 0;
-    display: block; /* Important: changement de flex à block */
-}
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-top: 0;
-    padding-top: 0;
-    z-index: 1000;
-}
-
-/* Si besoin, ajuster également le body */
-body {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-/* Container du logo pour assurer un centrage parfait */
-.logo-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-}
-
-/* Style du logo */
-.logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--primary);
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo img {
-    height: 100px;
-    transition: var(--transition);
-}
-
-/* Container des liens de navigation */
-.nav-links-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    background-color: rgba(254, 248, 255, 0.95);
-}
-
-/* Style des liens */
-.nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 35px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    position: relative;
-    transition: var(--transition);
-}
-
-/* Reste du style des liens inchangé... */
-.nav-links a:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    transition: var(--transition);
-}
-
-.nav-links a:hover:after {
-    width: 100%;
-}
-
-.nav-links a[href="#accueil"] {
-    color: var(--secondary);
-}
-
-.nav-links a[href="#accueil"]:after {
-    background-color: var(--secondary);
-}
-
-.nav-links a[href="#services"],
-.nav-links a[href="#lingerie-engagee"],
-.nav-links a[href="#contact"] {
-    color: var(--primary);
-}
-
-.nav-links a[href="#services"]:after,
-.nav-links a[href="#lingerie-engagee"]:after,
-.nav-links a[href="#contact"]:after {
-    background-color: var(--primary);
-}
-
-/* Adaptation pour mobile */
-@media screen and (max-width: 768px) {
-    .logo img {
-        height: 80px;
-    }
-    
-    .nav-links {
-        gap: 20px;
-    }
-}
+        /* Style du logo */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
-        /* --- HERO SECTION --- */
+        .logo img {
+            height: 70px; /* Réduit de 100px à 70px */
+            transition: var(--transition);
+        }
+        
+        /* Container des liens de navigation */
+        .nav-links-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 5px 0; /* Réduit de 10px à 5px */
+            background-color: rgba(250, 247, 249, 0.95);
+        }
+        
+        /* Style des liens */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.85rem; /* Réduit de 0.9rem */
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transition);
+            color: var(--dark);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px; /* Plus fin: 2px à 1px */
+            bottom: -3px; /* Remonté: -5px à -3px */
+            left: 0;
+            background-color: currentColor;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a[href="#accueil"] {
+            color: var(--secondary);
+        }
+        
+        .nav-links a[href="#services"],
+        .nav-links a[href="#lingerie-engagee"],
+        .nav-links a[href="#contact"] {
+            color: var(--primary);
+        }
+        
+        /* --- HERO SECTION REDESIGN --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/image.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: var(--light) !important;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            color: white;
+            padding: 60px 0;
             position: relative;
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(192, 76, 170, 0.2) 0%, rgba(119, 166, 102, 0.2) 100%);
-            top: -50%;
-            left: -50%;
-            animation: rotate 20s linear infinite;
+        /* Style des rectangles en disposition horizontale */
+        .hero-rectangles {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: stretch;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
         }
         
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .hero-content {
-            z-index: 10;
+        .hero-rectangle {
+            flex: 1;
+            min-width: 250px;
+            height: 280px;
+            background-color: var(--light);
+            border: none;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark);
+            text-decoration: none;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeUp 1.5s forwards 0.5s;
+            animation: rectangleAppear 0.8s forwards;
+            background-size: cover;
+            background-position: center;
         }
         
-        @keyframes fadeUp {
+        .hero-rectangle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+            z-index: 1;
+        }
+        
+        .hero-rectangle[href="#contact"] {
+            background-image: url('https://images.unsplash.com/photo-1618436908405-f02ef2fe025e?q=80&w=1000');
+        }
+        
+        .hero-rectangle[href="#guides"] {
+            background-image: url('AI0A5721.avif');
+        }
+        
+        .hero-rectangle[href="#concept"] {
+            background-image: url('https://images.unsplash.com/photo-1585194328937-30ffb4529e8f?q=80&w=1000');
+        }
+        
+        /* Animation d'apparition pour chaque rectangle */
+        @keyframes rectangleAppear {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+        .hero-rectangle:nth-child(1) {
+            animation-delay: 0.3s;
         }
         
-        .hero h1 span {
-            color: var(--primary);
-            font-style: italic;
+        .hero-rectangle:nth-child(2) {
+            animation-delay: 0.4s;
         }
         
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 50px;
-            line-height: 1.6;
-            font-weight: 300;
+        .hero-rectangle:nth-child(3) {
+            animation-delay: 0.5s;
         }
         
-        .hero-btn {
-            display: inline-block;
-            background: transparent;
-            color: white;
-            border: 1px solid white;
-            padding: 12px 30px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            text-decoration: none;
+        .rectangle-content {
             position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+            z-index: 2;
+            padding: 25px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
             width: 100%;
             height: 100%;
-            background: white;
-            transition: var(--transition);
-            z-index: -1;
         }
         
-        .hero-btn:hover {
-            color: var(--primary);
+        .hero-rectangle h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1.5;
+            text-align: center;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        .hero-btn:hover::before {
-            left: 0;
+        .hero-rectangle:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
-        /* --- BRAND VALUES --- */
+        /* --- BRAND VALUES REDESIGN --- */
         .values {
             display: flex;
             justify-content: space-around;
             padding: 100px 10%;
             background: var(--light);
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .value-item {
@@ -289,87 +317,107 @@ body {
         }
         
         .value-icon {
-            background: var(--primary);
-            width: 80px;
-            height: 80px;
+            background: var(--primary-light);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            box-shadow: 0 10px 20px rgba(192, 76, 170, 0.2);
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 15px rgba(157, 74, 138, 0.1);
             transition: var(--transition);
         }
         
         .value-item:nth-child(2) .value-icon {
-            background: var(--secondary);
-            box-shadow: 0 10px 20px rgba(119, 166, 102, 0.2);
-        }
-        
-        .value-item:hover .value-icon {
-            transform: translateY(-10px);
+            background: var(--secondary-light);
+            box-shadow: 0 8px 15px rgba(104, 134, 89, 0.1);
         }
         
         .value-icon span {
-            color: white;
-            font-size: 2rem;
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+        }
+        
+        .value-item:nth-child(2) .value-icon span {
+            color: var(--secondary-dark);
         }
         
         .value-item h3 {
             font-family: 'Playfair Display', serif;
             color: var(--dark);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 500;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
         
         .value-item p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.7;
         }
         
-        /* --- COLLECTION HIGHLIGHT --- */
+        /* --- COLLECTION HIGHLIGHT REDESIGN --- */
         .collection {
-            padding: 120px 10%;
+            padding: 100px 5%;
             text-align: center;
             background-color: white;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        
-        .section-title {
+        .hero {
+    background-color: rgba(255, 255, 255, 0.7) !important; /* au lieu de white ou 0.9 */
+}
+.section.values, 
+.section.collection, 
+.section.testimonial,
+.product-section,
+#lingerie-engagee,
+#services,
+#contact {
+    background-color: rgba(255, 255, 255, 0.7) !important; /* au lieu de white */
+}
+.section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
             color: var(--dark);
             position: relative;
             display: inline-block;
+            letter-spacing: 1px;
+            font-weight: 400;
         }
         
         .section-title span {
             color: var(--primary);
+            /* font-style: italic; */
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            width: 60px;
-            height: 3px;
+            width: 40px;
+            height: 1px;
             background: var(--primary);
-            bottom: -15px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
         }
         
         .collection p {
             max-width: 600px;
-            margin: 0 auto 60px;
-            color: #666;
+            margin: 0 auto 50px;
+            color: var(--text-light);
+            font-size: 0.95rem;
         }
         
         .collection-grid {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
+            margin: 60px 0;
         }
         
         .collection-item {
@@ -377,8 +425,8 @@ body {
             height: 400px;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
             transition: var(--transition);
             opacity: 0;
             transform: translateY(30px);
@@ -390,8 +438,8 @@ body {
         }
         
         .collection-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
         
         .collection-img {
@@ -406,10 +454,11 @@ body {
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.9);
-            padding: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
             transform: translateY(100%);
             transition: var(--transition);
+            text-align: center;
         }
         
         .collection-item:hover .collection-overlay {
@@ -417,57 +466,42 @@ body {
         }
         
         .collection-item:hover .collection-img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         
         .collection-name {
             font-family: 'Playfair Display', serif;
             color: var(--primary);
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .collection-price {
-            color: var(--dark);
-            font-weight: 500;
+            margin-bottom: 3px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
         }
         
         .collection-link {
             display: inline-block;
-            margin-top: 60px;
+            margin-top: 40px;
             color: var(--primary);
             border: 1px solid var(--primary);
-            padding: 12px 30px;
+            padding: 10px 28px;
             text-decoration: none;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-        }
-        
-        .collection-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            transition: var(--transition);
-            z-index: -1;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 2px;
         }
         
         .collection-link:hover {
+            background: var(--primary);
             color: white;
         }
         
-        .collection-link:hover::before {
-            left: 0;
-        }
-        
-        /* --- TESTIMONIAL --- */
+        /* --- TESTIMONIAL REDESIGN --- */
         .testimonial {
-            background: #f9f0fa;
-            padding: 100px 10%;
+            background: #f8f4f7;
+            padding: 80px 5%;
             text-align: center;
         }
         
@@ -486,10 +520,10 @@ body {
         
         .testimonial-quote {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--dark);
-            margin-bottom: 30px;
-            font-style: italic;
+            margin-bottom: 25px;
+            /* font-style: italic; */
             position: relative;
             line-height: 1.6;
         }
@@ -497,26 +531,27 @@ body {
         .testimonial-quote::before,
         .testimonial-quote::after {
             content: '"';
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.3;
+            font-size: 3rem;
+            color: var(--primary-light);
+            opacity: 0.8;
             position: absolute;
         }
         
         .testimonial-quote::before {
-            top: -30px;
-            left: -20px;
+            top: -20px;
+            left: -15px;
         }
         
         .testimonial-quote::after {
-            bottom: -60px;
-            right: -20px;
+            bottom: -50px;
+            right: -15px;
         }
         
         .testimonial-source {
-            color: #777;
-            margin-bottom: 50px;
-            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            /* font-style: italic; */
+            font-size: 0.9rem;
         }
         
         .testimonial-buttons {
@@ -527,35 +562,616 @@ body {
         
         .testimonial-btn {
             display: inline-block;
-            padding: 14px 30px;
+            padding: 12px 25px;
             text-decoration: none;
-            font-size: 0.9rem;
-            border-radius: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: var(--transition);
+            background: transparent;
+            border: 1px solid currentColor;
+            border-radius: 2px;
         }
         
         .btn-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .btn-gabrielr {
+            color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-gabrielr:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* --- DROPDOWN MENU REDESIGN --- */
+        /* Container de dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Style du lien principal qui toggle le dropdown */
+        .dropdown-toggle {
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: var(--transition);
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        .dropdown-toggle:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .dropdown-toggle:hover:after {
+            width: 100%;
+        }
+        
+        /* Menu dropdown principal */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            min-width: 200px;
+            /* background-color: rgba(255, 255, 255, 0.98); */
+            box-shadow: var(--shadow-md);
+            border-radius: var(--border-radius);
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1100;
+            backdrop-filter: blur(8px);
+            margin-top: 5px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* Sections du menu dropdown */
+        .dropdown-section {
+            padding: 5px 0;
+        }
+        
+        /* Style pour les titres de catégorie */
+        .dropdown-category {
+            position: relative;
+        }
+        
+        .dropdown-category-toggle {
+            display: block;
+            padding: 8px 20px;
+            color: var(--dark);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            text-align: left;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .dropdown-category-toggle:hover {
+            background-color: rgba(157, 74, 138, 0.05);
+            color: var(--primary);
+            border-left: 2px solid var(--primary);
+        }
+        
+        /* Sous-catégories */
+        .dropdown-subcategory {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .dropdown-category.active .dropdown-subcategory {
+            max-height: 300px;
+        }
+        
+        .dropdown-subcategory a {
+            display: block;
+            padding: 7px 20px 7px 30px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            text-align: left;
+        }
+        
+        .dropdown-subcategory a:hover {
+            background-color: rgba(157, 74, 138, 0.05);
+            color: var(--primary);
+        }
+        
+        /* --- PRODUCT SECTIONS REDESIGN --- */
+        .product-section {
+            display: none;
+            min-height: 100vh;
+            padding: 90px 5% 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .product-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-collection-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin-bottom: 30px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            margin: 12px 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+        
+        .size-selector p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .size-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .size-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .size-btn:hover {
             background: var(--primary);
             color: white;
         }
         
-        .btn-primary:hover {
-            background: #a83896;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(168, 56, 150, 0.3);
-        }
-        
-        .btn-secondary {
-            background: var(--secondary);
+        .size-btn.selected {
+            background: var(--primary);
             color: white;
         }
         
-        .btn-secondary:hover {
-            background: #5d8a4f;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(93, 138, 79, 0.3);
+        /* --- LINGERIE ENGAGÉE REDESIGN --- */
+        .lingerie-engagee-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 20px 60px;
+            text-align: center;
         }
-
+        
+        .engagement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .engagement-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            height: 100%;
+        }
+        
+        .engagement-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .engagement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        
+        .engagement-icon span {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+        }
+        
+        .engagement-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .engagement-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .certification-section {
+            margin: 60px 0 50px;
+        }
+        
+        .certification-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+        
+        .certification-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .certification-logo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            transition: var(--transition);
+        }
+        
+        .certification-logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--primary);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        .engagement-action {
+            margin: 50px 0 30px;
+        }
+        
+        .engagement-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary);
+            padding: 12px 28px;
+            border: 1px solid var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        .engagement-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* --- CONTACT REDESIGN --- */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 20px 60px;
+            text-align: center;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 40px;
+        }
+        
+        .contact-info, .contact-form, .contact-map {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .contact-icon {
+            background: var(--primary-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-icon span {
+            color: var(--primary-dark);
+            font-size: 1rem;
+        }
+        
+        .contact-item h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-item p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .contact-hours {
+            text-align: left;
+            margin-top: 35px;
+            border-top: 1px solid var(--primary-light);
+            padding-top: 20px;
+        }
+        
+        .contact-hours h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-hours p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            transition: border-color 0.3s ease;
+            background-color: #fafafa;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            background-color: white;
+        }
+        
+        .submit-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .contact-map {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+        
+        #boutique-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        /* Styles pour la popup de la carte */
+        .boutique-popup-container .leaflet-popup-content-wrapper {
+            background: white;
+            color: var(--text);
+            box-shadow: var(--shadow-md);
+            border-radius: var(--border-radius);
+            padding: 0;
+            text-align: center;
+            width: 200px !important;
+        }
+        
+        .boutique-popup-container .leaflet-popup-content {
+            margin: 0;
+            width: auto !important;
+            line-height: 1.4;
+        }
+        
+        .boutique-popup {
+            padding: 12px;
+        }
+        
+        .boutique-popup h3 {
+            color: var(--primary);
+            margin: 0 0 5px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .boutique-popup p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        
+        /* Style du marqueur */
+        .custom-marker {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* --- PAGE STYLES --- */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 90px 5% 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            background-color: var(--light);
+        }
+        
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         /* --- SCROLL REVEAL --- */
         .scroll-reveal {
             opacity: 0;
@@ -568,160 +1184,172 @@ body {
             transform: translateY(0);
         }
         
-        /* --- CURSOR EFFECT --- */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            opacity: 0.5;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+        /* --- MEDIA QUERIES --- */
+        @media screen and (max-width: 1024px) {
+            .values {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .value-item {
+                margin-left: 0 !important;
+            }
         }
         
-        .cursor.grow {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: transparent;
-            border: 1px solid var(--primary);
+        @media screen and (max-width: 768px) {
+            /* Navigation */
+            nav {
+                height: auto;
+                padding: 0;
+            }
+            
+            .logo img {
+                height: 60px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px 0;
+            }
+            
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+            
+            /* Hero section */
+            .hero-rectangles {
+                flex-direction: column;
+                width: 90%;
+                max-width: 400px;
+                gap: 25px;
+            }
+            
+            .hero-rectangle {
+                width: 100%;
+                height: 180px;
+            }
+            
+            /* Collection grid */
+            .collection-grid {
+                gap: 30px;
+            }
+            
+            .collection-item {
+                width: 260px;
+                height: 360px;
+            }
+            
+            /* Testimonial */
+            .testimonial-quote {
+                font-size: 1.5rem;
+            }
+            
+            .testimonial-buttons {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            /* Contact */
+            .contact-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            /* Dropdown menu */
+            .dropdown-menu {
+                width: 90%;
+                max-width: 300px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
-        /* --- MEDIA QUERIES POUR RESPONSIVE --- */
-/* --- MEDIA QUERIES POUR RESPONSIVE --- */
-@media screen and (max-width: 1024px) {
-    .values {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
-    }
-    
-    .value-item {
-        margin-left: 0 !important; /* Supprime le décalage des éléments de valeur */
-    }
-    
-    .collection-grid {
-        gap: 20px;
-    }
-    
-    .testimonial-quote {
-        font-size: 1.5rem;
-    }
-    
-    .testimonial-quote::before,
-    .testimonial-quote::after {
-        font-size: 3rem;
-    }
+        
+        @media screen and (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-rectangle h3 {
+                font-size: 1.1rem;
+            }
+            
+            .collection-item {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .certification-logo {
+                width: 80px;
+                height: 80px;
+            }
+        }
+        
+        /* --- CUSTOM FOOTER --- */
+        .footer-brand {
+            text-align: center;
+            padding: 30px 0;
+            background-color: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .gabriel-typography {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .gabriel-typography .dot {
+            color: var(--secondary);
+            position: relative;
+            top: -0.05em;
+        }
+        
+        /* --- TYPOGRAPHY STYLES --- */
+        .gabriel-style {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Suppression du bord sous les titres de catégories */
+        .dropdown-section .dropdown-category .dropdown-category-toggle::after,
+        .category-name.gabriel-style::after {
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+        }
+        
+        /* --- BACKGROUND STYLE --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg'); /* Remplacer par votre image */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; /* Légèrement plus visible */
+    z-index: -1;
+    pointer-events: none;
 }
 
-@media screen and (max-width: 768px) {
-    /* Navigation */
-    nav {
-        flex-direction: column;
-        padding: 10px 5%;
-    }
-    
-    .nav-links {
-        /* margin-top: 10px; */
-        gap: 20px;
-    }
-    
-    .logo img {
-        height: 80px;
-    }
-    
-    /* Hero */
-    .hero h1 {
-        font-size: 3rem;
-    }
-    
-    .hero p {
-        font-size: 1rem;
-        padding: 0 20px;
-    }
-    
-    /* Collection et contact titres */
-    #services .section-title,
-    #contact .section-title {
-        margin-top: 30px;
-    }
-    
-    /* Collection */
-    .collection-grid {
-        justify-content: center;
-    }
-    
-    /* Testimonial */
-    .testimonial-buttons {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    /* Contact page */
-    .contact-content {
-        flex-direction: column;
-    }
-    
-    .contact-form {
-        padding: 20px;
-    }
-    
-    /* Désactiver le curseur personnalisé sur mobile */
-    .cursor {
-        display: none;
-    }
-}
 
-@media screen and (max-width: 480px) {
-    /* Navigation */
-    .nav-links {
-        gap: 15px;
-    }
-    
-    .nav-links a {
-        font-size: 0.8rem;
-    }
-    
-    /* Hero */
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-btn {
-        padding: 10px 20px;
-    }
-    
-    /* Values */
-    .value-item {
-        max-width: 90%;
-    }
-    
-    /* Collection */
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    /* Product grid */
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Contact */
-    .contact-item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .contact-icon {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-    
-    .contact-hours {
-        text-align: center;
-    }
-}
     </style>
 </head>
 <body>
@@ -1616,7 +2244,7 @@ function setupCollectionButtonBehavior() {
 </script>
 
 <!-- Section Lingerie Engagée -->
-<section id="lingerie-engagee" class="page">
+<section id="lingerie-engagee" class="page" style="background-color:white">
     <div class="lingerie-engagee-container">
         <h2 class="section-title gabriel-style">Lingerie <span>Engagée</span></h2>
         <p class="scroll-reveal">Découvrez notre engagement pour une mode responsable et éthique. Chaque pièce raconte une histoire de développement durable et de respect.</p>
@@ -1681,16 +2309,16 @@ function setupCollectionButtonBehavior() {
 </section>
 
 <!-- Sections de produits pour Hommes -->
-<section id="calcons" class="product-section page">
+<section id="calcons" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Collection <span>Caleçons</span></h2>
         <p class="scroll-reveal">Notre sélection de caleçons alliant confort et élégance, conçus pour le quotidien comme pour les occasions spéciales.</p>
         
         <div class="product-grid">
             <!-- Produit 1 -->
-            <div class="product-card scroll-reveal">
+            <!-- <div class="product-card scroll-reveal">
                 <div class="product-image-container">
-                    <img src="74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg" alt="Caleçon Élégant" class="product-image">
+                    <img src="/testt/74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg" alt="Caleçon Élégant" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Caleçon en coton bio et modal, coupe ajustée etconfortable avec élastique doux.</p>
@@ -1707,12 +2335,12 @@ function setupCollectionButtonBehavior() {
                     </div>
                 </div>
                 <h3 class="product-name">Caleçon Élégant</h3>
-            </div>
+            </div> -->
             
             <!-- Produit 2 -->
             <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Caleçon Confort" class="product-image">
+                    <img src="ULLYS_CALECON-HOMME-COTON-LE-RAYE-GRIS-BLANC-3.webp" alt="Caleçon Confort" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Caleçon en bambou et coton, tissu respirant et naturellement antibactérien. Coupe ample et agréable.</p>
@@ -1734,7 +2362,7 @@ function setupCollectionButtonBehavior() {
     </div>
 </section>
 
-<section id="maillots-homme" class="product-section page">
+<section id="maillots-homme" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Maillots de Bain <span>Hommes</span></h2>
         <p class="scroll-reveal">Des maillots de bain stylés et confortables, conçus pour résister au chlore et au sel marin.</p>
@@ -1743,7 +2371,7 @@ function setupCollectionButtonBehavior() {
             <!-- Produit 1 -->
             <div class="product-card scroll-reveal">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Short de Bain" class="product-image">
+                    <img src="Short-de-Bain-24H-Le-Mans.webp" alt="Short de Bain" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Short de bain en polyester recyclé, séchage rapide avec motifs géométriques élégants.</p>
@@ -1763,7 +2391,7 @@ function setupCollectionButtonBehavior() {
             </div>
             
             <!-- Produit 2 -->
-            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
+            <!-- <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
                 <div class="product-image-container">
                     <img src="/api/placeholder/500/600" alt="Slip de Bain" class="product-image">
                     <div class="product-overlay">
@@ -1782,13 +2410,13 @@ function setupCollectionButtonBehavior() {
                     </div>
                 </div>
                 <h3 class="product-name">Slip de Bain Performance</h3>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
 
 <!-- Sections de produits pour Femmes -->
-<section id="soutiens-gorge" class="product-section page">
+<section id="soutiens-gorge" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Collection <span>Soutiens-gorge</span></h2>
         <p class="scroll-reveal">Notre gamme de soutiens-gorge alliant confort, maintien et élégance, pour sublimer chaque silhouette.</p>
@@ -1797,7 +2425,7 @@ function setupCollectionButtonBehavior() {
             <!-- Produit 1 -->
             <div class="product-card scroll-reveal">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Soutien-gorge Balconnet" class="product-image">
+                    <img src="eservices_marie_jo_swim-swim-preshaped_bikini_top-emly-1007716-black-162407.avif" alt="Soutien-gorge Balconnet" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Soutien-gorge balconnet en dentelle française et coton biologique, armatures confortables.</p>
@@ -1819,7 +2447,7 @@ function setupCollectionButtonBehavior() {
             <!-- Produit 2 -->
             <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Bralette" class="product-image">
+                    <img src="0101335ZWA-Soutien-Gorge-Balconnet-Rembourre-Couture-Marie-Jo-Jane-Noir_1_1080x.webp" alt="Bralette" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Bralette en dentelle et modal, sans armatures pour un confort optimal et une féminité naturelle.</p>
@@ -1841,38 +2469,17 @@ function setupCollectionButtonBehavior() {
     </div>
 </section>
 
-<section id="culotte" class="product-section page">
+<section id="culotte" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Collection <span>Culottes</span></h2>
         <p class="scroll-reveal">Des culottes élégantes et confortables pour tous les jours, créées dans des matières douces et respirantes.</p>
         
-        <div class="product-grid">
-            <!-- Produit 1 -->
-            <div class="product-card scroll-reveal">
-                <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Culotte Taille Haute" class="product-image">
-                    <div class="product-overlay">
-                        <div class="product-details">
-                            <p class="product-description">Culotte taille haute en coton bio, coupe gainante et confortable pour sublimer votre silhouette.</p>
-                            <div class="size-selector">
-                                <p>Sélectionnez votre taille</p>
-                                <div class="size-options">
-                                    <button class="size-btn">XS</button>
-                                    <button class="size-btn">S</button>
-                                    <button class="size-btn">M</button>
-                                    <button class="size-btn">L</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="product-name">Culotte Taille Haute Élégance</h3>
-            </div>
-            
+        
+            <div class="product-grid">
             <!-- Produit 2 -->
             <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Tanga" class="product-image">
+                    <img src="tanga---arlette-08200S10-RT-1.webp" alt="Tanga" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Tanga en dentelle et coton, coupe moderne et féminine pour un confort quotidien.</p>
@@ -1894,7 +2501,7 @@ function setupCollectionButtonBehavior() {
     </div>
 </section>
 
-<section id="body" class="product-section page">
+<section id="body" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Collection <span>Body</span></h2>
         <p class="scroll-reveal">Des body raffinés qui allient confort et élégance, parfaits sous vos tenues de tous les jours ou pour des occasions spéciales.</p>
@@ -1903,7 +2510,7 @@ function setupCollectionButtonBehavior() {
             <!-- Produit 1 -->
             <div class="product-card scroll-reveal">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Body en Dentelle" class="product-image">
+                    <img src="BodyDentellePasCher_3.webp" alt="Body en Dentelle" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Body en dentelle française et microfibre, ajustable et confortable pour toutes les morphologies.</p>
@@ -1923,62 +2530,24 @@ function setupCollectionButtonBehavior() {
             </div>
             
             <!-- Produit 2 -->
-            <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
-                <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Body Sculptant" class="product-image">
-                    <div class="product-overlay">
-                        <div class="product-details">
-                            <p class="product-description">Body sculptant en microfibre et élasthanne, effet gainant et maintien parfait pour une silhouette affinée.</p>
-                            <div class="size-selector">
-                                <p>Sélectionnez votre taille</p>
-                                <div class="size-options">
-                                    <button class="size-btn">XS</button>
-                                    <button class="size-btn">S</button>
-                                    <button class="size-btn">M</button>
-                                    <button class="size-btn">L</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="product-name">Body Sculptant Satiné</h3>
-            </div>
+            
         </div>
     </div>
 </section>
 
-<section id="maillots-femme" class="product-section page">
+<section id="maillots-femme" class="product-section page"  style="background-color:white">
     <div class="product-collection-container">
         <h2 class="section-title scroll-reveal">Maillots de Bain <span>Femmes</span></h2>
         <p class="scroll-reveal">Des maillots de bain élégants et confortables, conçus pour sublimer toutes les morphologies.</p>
         
         <div class="product-grid">
             <!-- Produit 1 -->
-            <div class="product-card scroll-reveal">
-                <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Maillot Une Pièce" class="product-image">
-                    <div class="product-overlay">
-                        <div class="product-details">
-                            <p class="product-description">Maillot une pièce en polyamide recyclé, décolleté élégant et coupe gainante pour un effet sculptant.</p>
-                            <div class="size-selector">
-                                <p>Sélectionnez votre taille</p>
-                                <div class="size-options">
-                                    <button class="size-btn">XS</button>
-                                    <button class="size-btn">S</button>
-                                    <button class="size-btn">M</button>
-                                    <button class="size-btn">L</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h3 class="product-name">Maillot Une Pièce Élégance</h3>
-            </div>
+            
             
             <!-- Produit 2 -->
             <div class="product-card scroll-reveal" style="transition-delay: 0.1s;">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Bikini" class="product-image">
+                    <img src="all_PLP_Women_Swimwear_Bikini.jpg" alt="Bikini" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Bikini en polyester recyclé, top à armatures et culotte échancrée pour un look moderne et raffiné.</p>
@@ -1999,11 +2568,114 @@ function setupCollectionButtonBehavior() {
         </div>
     </div>
 </section>
+    <style>
+.main-title-container {
+    text-align: center;
+    padding: 10px 20px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+.main-title .title-line {
+    display: block;
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.main-title .title-accent {
+    display: block; 
+    font-size: 3.5rem;
+    color: var(--primary);
+    /* font-style: italic; */
+}
+
+.title-tagline {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Animation subtile */
+.main-title-container {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInTitle 1s forwards 0.3s;
+}
+
+@keyframes fadeInTitle {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .main-title-container {
+        padding: 100px 20px 10px;
+    }
     
+    .main-title .title-line {
+        font-size: 2rem;
+    }
+    
+    .main-title .title-accent {
+        font-size: 2.8rem;
+    }
+    
+    .title-tagline {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-title-container {
+        padding: 90px 15px 5px;
+    }
+    
+    .main-title .title-line {
+        font-size: 1.6rem;
+    }
+    
+    .main-title .title-accent {
+        font-size: 2.2rem;
+    }
+    
+    .title-tagline {
+        font-size: 0.9rem;
+    }
+}
+</style>
     <!-- Hero Section -->
     <!-- Hero Section avec trois rectangles horizontaux luxueux -->
-<section class="hero" id="accueil">
+<section class="hero" id="accueil"  style="background-color:white">
+    
+<!-- Titre principal à ajouter juste avant la section hero -->
+<div class="main-title-container">
+    <h1 class="main-title">
+        <span class="title-line">L'Élégance</span>
+        <span class="title-accent">Intemporelle</span>
+    </h1>
+    <p class="title-tagline">Découvrez notre collection de lingerie raffinée, alliant confort, éthique et sophistication</p>
+</div>
     <div class="hero-content">
+        
         <div class="hero-rectangles-container">
             <div class="hero-rectangles">
                 <a href="#contact" class="hero-rectangle rectangle-secondary">
@@ -2039,7 +2711,7 @@ function setupCollectionButtonBehavior() {
 </section>
     
     <!-- Brand Values -->
-    <section class="values">
+    <section class="values"  style="background-color:white">
         <div class="value-item scroll-reveal">
             <div class="value-icon">
                 <span>✿</span>
@@ -2066,7 +2738,7 @@ function setupCollectionButtonBehavior() {
     </section>
     
     <!-- Collection Highlight -->
-    <section class="collection">
+    <section class="collection" style="background-color:white">
         <h2 class="section-title scroll-reveal">La nouvelle <span>collection</span></h2>
         <br>
         <br>
@@ -2083,7 +2755,7 @@ function setupCollectionButtonBehavior() {
         
         <div class="collection-grid">
             <div class="collection-item scroll-reveal">
-                <img src="image.png" alt="" class="collection-img">
+                <img src="PrimaDonna_SS2016_207073.avif" alt="" class="collection-img">
                 <div class="collection-overlay">
                     <h3 class="collection-name">nom de l'article</h3>
                     <!-- <p class="collection-price">189€</p> -->
@@ -2091,7 +2763,7 @@ function setupCollectionButtonBehavior() {
             </div>
             
             <div class="collection-item scroll-reveal" style="transition-delay: 0.2s;">
-                <img src="image-removebg-preview.png" alt="" class="collection-img">
+                <img src="Lincherie__33_van_146_.avif" alt="" class="collection-img">
                 <div class="collection-overlay">
                     <h3 class="collection-name">nom de l'article</h3>
                     <!-- <p class="collection-price">219€</p> -->
@@ -2103,7 +2775,7 @@ function setupCollectionButtonBehavior() {
     </section>
     
     <!-- Testimonial -->
-    <section class="testimonial">
+    <section class="testimonial"  style="background-color:white">
         <div class="testimonial-content scroll-reveal">
             <p class="testimonial-quote">Une lingerie qui célèbre le corps féminin avec grâce et sophistication.</p>
             <p class="testimonial-source">— Marie Claire, Éditorial Elle</p>
@@ -2117,7 +2789,7 @@ function setupCollectionButtonBehavior() {
     </section>
 
     <!-- Section Collection (page séparée) -->
-<section id="services" class="page">
+<section id="services" class="page" >
     <div class="collection-container">
         <h2 class="section-title gabriel-style">Notre <span>Collection</span></h2>
         <p class="scroll-reveal">Explorez notre gamme exclusive de lingerie de luxe, conçue pour sublimer chaque silhouette avec élégance et raffinement.</p>
@@ -2223,10 +2895,10 @@ function setupCollectionButtonBehavior() {
 </section>
 
 <!-- Section Contact -->
-<section id="contact" class="page">
+<section id="contact" class="page" style="background-color:white">
     <div class="contact-container">
         <h2 class="section-title scroll-reveal">Contactez <span>Nous</span></h2>
-        <p class="scroll-reveal">Pour toute demande personnalisée ou rendez-vous dans notre atelier-boutique à Paris.</p>
+        <p class="scroll-reveal">Pour toute demande personnalisée ou rendez-vous dans notre atelier-boutique à Rennes.</p>
         
         <div class="contact-content">
             <div class="contact-info scroll-reveal">
@@ -3187,50 +3859,66 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <style>
     /* Image de fond pour tout le site avec filtre de couleur */
-    body {
-        background-image: url('74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg');
-        background-attachment: fixed;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-    }
-    
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(192, 76, 170, 0.85) 0%, rgba(119, 166, 102, 0.85) 100%);
-        z-index: -1;
-        pointer-events: none;
-    }
+body {
+    background-color: white; /* Fond blanc comme base */
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/testt/74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Image d'arrière-plan très légère */
+    z-index: -1;
+    pointer-events: none;
+}
+.cursor {
+    display: none;
+}
     
     /* Adaptation du style des sections pour la nouvelle image de fond */
-    .page, section:not(.hero) {
-        background-color: rgba(254, 248, 255, 0.92);
-        border-radius: 8px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        margin: 20px auto;
-        max-width: 1400px;
-        width: 95%;
-    }
+.page, section:not(.hero), .hero {
+    /* Remplacez background-color: white; par background-color: transparent; ou supprimez cette ligne */
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Fond blanc semi-transparent */
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ajouter de légères séparations entre les sections */
+.values, .collection, .testimonial, .hero, .page {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
     
     /* Style pour la nouvelle section Hero avec rectangles horizontaux luxueux */
-    .hero {
-        height: 100vh;
-        background: transparent !important; /* Retire le background précédent */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-    }
+    /* À ajouter/modifier dans votre code CSS */
+.hero {
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9) !important; /* Même fond que les autres sections */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Vous pouvez supprimer ou commenter cette ligne dans votre code */
+/* style="background-color:white" */
     
     /* Retirez le filtre précédent */
     .hero::before {
@@ -3265,29 +3953,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     .hero-rectangle {
-        flex: 1;
-        width: calc(33.33% - 80px/3); /* Distribue l'espace équitablement en tenant compte des gaps */
-        min-width: 250px;
-        height: 260px;
-        background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(10px);
-        border-radius: 4px; /* Coins moins arrondis pour plus de sobriété */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-decoration: none;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée et complexe */
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                    box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: rectangleAppear 0.8s forwards;
-    }
+    flex: 1;
+    width: calc(33.33% - 80px/3);
+    min-width: 250px;
+    height: 260px;
+    background-color: transparent; /* Fond transparent */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Bordure blanche semi-transparente */
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: rectangleAppear 0.8s forwards;
+    background-size: cover;
+    background-position: center;
+}
+.hero-rectangle[href="#contact"] {
+    background-image: url('ChatGPT\ Image\ 16\ mai\ 2025\,\ 14_30_40.png');
+}
+
+.hero-rectangle[href="#guides"] {
+    background-image: url('AI0A5721.avif');
+}
+
+.hero-rectangle[href="#concept"] {
+    background-image: url('ChatGPT\ Image\ 16\ mai\ 2025\,\ 14_44_27.png');
+}
     
     /* Animation d'apparition pour chaque rectangle */
     @keyframes rectangleAppear {
@@ -3348,7 +4048,25 @@ document.addEventListener('DOMContentLoaded', function() {
         width: 100%;
         height: 100%;
     }
-    
+    .hero-rectangle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(0px);
+    transition: filter 0.4s ease;
+    z-index: 1;
+}
+
+.hero-rectangle:hover::before {
+    filter: blur(3px);
+}
+
     .rectangle-icon {
         font-size: 3.5rem; /* Icône plus grande pour plus d'impact */
         margin-bottom: 10px;
@@ -3371,15 +4089,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     .hero-rectangle h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
-        font-weight: 400; /* Plus léger pour plus d'élégance */
-        letter-spacing: 1px; /* Espacement des lettres pour un look sophistiqué */
-        margin: 0;
-        line-height: 1.5;
-        text-align: center;
-        text-transform: uppercase; /* Majuscules pour un aspect luxueux */
-    }
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Ombre de texte pour meilleure lisibilité */
+}
     
     /* Couleurs spécifiques pour chaque rectangle */
     .rectangle-primary {
@@ -3416,12 +4135,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         .rectangle-content {
-            flex-direction: row;
-            text-align: left;
-            justify-content: flex-start;
-            padding: 20px 30px;
-            gap: 30px;
-        }
+    position: relative;
+    z-index: 2; /* Au-dessus de l'image de fond et du flou */
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
         
         .rectangle-text {
             align-items: flex-start;
@@ -3538,7 +4262,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 <div class="footer-brand">
-    <span class="gabriel-typography">GABRIEL<span class="dot">.</span>LE</span>
+    <span class="gabriel-typography">GABRIE<span style="color: #77a666;">L</span><span class="dot">.</span><span style="color: #c04caa;">LE</span></span>
 </div>
 </body>
 </html>
