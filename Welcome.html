@@ -40,7 +40,7 @@
 /* D'abord, réinitialisons complètement le style de la navigation */
 nav {
     position: fixed;
-    height: 50px;
+    height: 100px;
     width: 100%;
     background-color: rgba(254, 248, 255, 0.95);
     z-index: 1000;
@@ -50,12 +50,11 @@ nav {
     padding: 0;
     display: block; /* Important: changement de flex à block */
 }
-        nav {
+nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-            height: 157px;
     margin-top: 0;
     padding-top: 0;
     z-index: 1000;
@@ -623,7 +622,7 @@ body {
     }
     
     .nav-links {
-        margin-top: 10px;
+        /* margin-top: 10px; */
         gap: 20px;
     }
     
@@ -1660,7 +1659,7 @@ function setupCollectionButtonBehavior() {
             </div>
         </div>
         
-<!--         <div class="certification-section scroll-reveal">
+        <div class="certification-section scroll-reveal">
             <h3>Nos Certifications</h3>
             <div class="certification-logos">
                 <div class="certification-logo">
@@ -1677,7 +1676,7 @@ function setupCollectionButtonBehavior() {
         
         <div class="engagement-action scroll-reveal">
             <a href="#contact" class="engagement-btn">Parlez-nous de vos valeurs</a>
-        </div> -->
+        </div>
     </div>
 </section>
 
@@ -1691,7 +1690,7 @@ function setupCollectionButtonBehavior() {
             <!-- Produit 1 -->
             <div class="product-card scroll-reveal">
                 <div class="product-image-container">
-                    <img src="/api/placeholder/500/600" alt="Caleçon Élégant" class="product-image">
+                    <img src="74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg" alt="Caleçon Élégant" class="product-image">
                     <div class="product-overlay">
                         <div class="product-details">
                             <p class="product-description">Caleçon en coton bio et modal, coupe ajustée etconfortable avec élastique doux.</p>
@@ -2009,27 +2008,27 @@ function setupCollectionButtonBehavior() {
             <div class="hero-rectangles">
                 <a href="#contact" class="hero-rectangle rectangle-secondary">
                     <div class="rectangle-content">
-                        <div class="rectangle-icon">📅</div>
+                        <!-- <div class="rectangle-icon">📅</div> -->
                         <div class="rectangle-text">
-                            <h3>Prendre<br>RDV</h3>
+                            <h3>Prendre<br>RENDEZ-VOUS</h3>
                         </div>
                     </div>
                     <div class="rectangle-shine"></div>
                 </a>
                 <a href="#guides" class="hero-rectangle rectangle-primary">
                     <div class="rectangle-content">
-                        <div class="rectangle-icon">📏</div>
+                        <!-- <div class="rectangle-icon">📏</div> -->
                         <div class="rectangle-text">
-                            <h3>Nos<br>Conseils<br>Guide des<br>Tailles</h3>
+                            <h3>Nos<br>Conseils<br><br>Guide des<br>Tailles</h3>
                         </div>
                     </div>
                     <div class="rectangle-shine"></div>
                 </a>
                 <a href="#concept" class="hero-rectangle rectangle-primary">
                     <div class="rectangle-content">
-                        <div class="rectangle-icon">✨</div>
+                        <!-- <div class="rectangle-icon">✨</div> -->
                         <div class="rectangle-text">
-                            <h3>Notre<br>Concept<br>À Propos de<br>Nous</h3>
+                            <h3>Notre<br>Concept<br><br>À Propos de<br>Nous</h3>
                         </div>
                     </div>
                     <div class="rectangle-shine"></div>
@@ -2053,8 +2052,8 @@ function setupCollectionButtonBehavior() {
             <div class="value-icon">
                 <span>♻</span>
             </div>
-            <h3>valeur description etc</h3>
-            <p>jsp si c'est eco sur un mal entendu mdr</p>
+            <h3>Éco-responsabilité</h3>
+            <p>Nos créations allient élégance et respect de l'environnement grâce à des matières recyclées et durables.</p>
         </div>
         
         <div class="value-item scroll-reveal" style="transition-delay: 0.4s;">
@@ -2069,7 +2068,18 @@ function setupCollectionButtonBehavior() {
     <!-- Collection Highlight -->
     <section class="collection">
         <h2 class="section-title scroll-reveal">La nouvelle <span>collection</span></h2>
-        <p class="scroll-reveal">vous ferai la pipelette mdr </p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+ <style>       /* Méthode alternative pour supprimer les traits */
+.dropdown-section .dropdown-category .dropdown-category-toggle::after,
+.category-name.gabriel-style::after {
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}</style>
         
         <div class="collection-grid">
             <div class="collection-item scroll-reveal">
@@ -3174,10 +3184,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 </style>
+
 <style>
     /* Image de fond pour tout le site avec filtre de couleur */
     body {
-        background-image: url('/74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg');
+        background-image: url('74809970-underwear-background-design-fashion-feminine-vector-illustration-cartoon-sketch-element-bra.jpg');
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
@@ -3372,7 +3383,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     /* Couleurs spécifiques pour chaque rectangle */
     .rectangle-primary {
-        background: linear-gradient(145deg, rgba(192, 76, 170, 0.85), rgba(192, 76, 170, 0.7));
+        background: linear-gradient(145deg, rgba(192, 76, 170), rgba(192, 76, 170));
     }
     
     .rectangle-secondary {
